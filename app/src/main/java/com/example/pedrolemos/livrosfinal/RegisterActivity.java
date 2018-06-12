@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -57,7 +59,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 Toast.makeText(RegisterActivity.this, "User was registered successfuly", Toast.LENGTH_SHORT).show();
                                 fazerLogin(email.getText().toString(), password.getText().toString());
                             }else{
-                                Toast.makeText(RegisterActivity.this, "The registration failed. Is the password too short?", Toast.LENGTH_LONG).show();
+                                Toast.makeText(RegisterActivity.this, "The registration failed", Toast.LENGTH_LONG).show();
                             }
                         }
                     });
@@ -76,10 +78,19 @@ public class RegisterActivity extends AppCompatActivity {
         String pass = password.getText().toString().trim();
         String confirm = confirmPassword.getText().toString().trim();
 
+
+        /** Validar se o email está na forma correta */
+        if (!Patterns.EMAIL_ADDRESS.matcher(mail).matches()){
+            Toast.makeText(RegisterActivity.this, "Enter a valid email", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        /** Validar se os campos estão todos preenchidos */
         if (user.isEmpty() || mail.isEmpty() || pass.isEmpty() || confirm.isEmpty()) {
             Toast.makeText(RegisterActivity.this, "Please don't leave any field empty", Toast.LENGTH_LONG).show();
             return false;
         }else{
+            /** Verificar se a password é igual à sua confirmação */
             if(pass.equals(confirm)){
 
                 return true;
@@ -93,6 +104,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
+
+    /** Método que faz login automaticamente após o registo seja um sucesso */
     private void fazerLogin(String nm, String ps){
         firebaseAuth.signInWithEmailAndPassword(nm, ps).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
@@ -107,6 +120,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
+    /** Método que volta para o login se for premido o botão Back no dispositivo */
     @Override
     public void onBackPressed() {
         super.onBackPressed();
