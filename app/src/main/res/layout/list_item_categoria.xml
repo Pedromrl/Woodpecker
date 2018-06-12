@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="150dp"
+    android:layout_height="wrap_content"
+    android:id="@+id/livros_layout_cat"
+    >
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view_cat"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/card_margin"
+        android:elevation="3dp"
+        card_view:cardCornerRadius="@dimen/card_album_radius">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/capa_cat"
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:scaleType="fitXY" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/id_cat"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/nome_cat"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_below="@id/capa_cat"
+                android:paddingLeft="@dimen/album_title_padding"
+                android:paddingRight="@dimen/album_title_padding"
+                android:paddingTop="5dp"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/album_title"
+                android:textAlignment="center"
+                android:maxLines="2"
+                />
+
+
+
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

@@ -1,0 +1,116 @@
+package com.example.pedrolemos.livrosfinal;
+
+import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+public class RegisterActivity extends AppCompatActivity {
+
+    @BindView(R.id.etEmailR)
+    EditText email;
+
+    @BindView(R.id.etUsernameR)
+    EditText username;
+
+    @BindView(R.id.etPasswordR)
+    EditText password;
+
+    @BindView(R.id.etConfirmPasswordR)
+    EditText confirmPassword;
+
+    @BindView(R.id.signupR)
+    LinearLayout signup;
+
+    private FirebaseAuth firebaseAuth;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_register);
+
+        ButterKnife.bind(this);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(validar()){
+                    firebaseAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(task.isSuccessful()){
+                                Toast.makeText(RegisterActivity.this, "User was registered successfuly", Toast.LENGTH_SHORT).show();
+                                fazerLogin(email.getText().toString(), password.getText().toString());
+                            }else{
+                                Toast.makeText(RegisterActivity.this, "The registration failed. Is the password too short?", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
+                }else{
+
+                }
+            }
+        });
+
+
+    }
+
+    private Boolean validar(){
+        String user = username.getText().toString().trim();
+        String mail = email.getText().toString().trim();
+        String pass = password.getText().toString().trim();
+        String confirm = confirmPassword.getText().toString().trim();
+
+        if (user.isEmpty() || mail.isEmpty() || pass.isEmpty() || confirm.isEmpty()) {
+            Toast.makeText(RegisterActivity.this, "Please don't leave any field empty", Toast.LENGTH_LONG).show();
+            return false;
+        }else{
+            if(pass.equals(confirm)){
+
+                return true;
+            }
+            else{
+                Toast.makeText(RegisterActivity.this, "The confirm password isn't the same as the password", Toast.LENGTH_LONG).show();
+                return false;
+            }
+        }
+
+
+    }
+
+    private void fazerLogin(String nm, String ps){
+        firebaseAuth.signInWithEmailAndPassword(nm, ps).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()){
+                    startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                    finish();
+                }else{
+                    Toast.makeText(RegisterActivity.this, "Login unsuccessful", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+        finish();
+    }
+}

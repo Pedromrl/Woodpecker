@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterActivity"
+    android:background="@drawable/appbackground"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/applogobrown"
+        android:rotation="25"/>
+
+    <EditText
+        android:id="@+id/etUsernameR"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/logo"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:hint="Username"
+        android:textColorHint="@color/colorPrimaryDark"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="14sp"
+        android:drawableLeft="@drawable/user_r"/>
+
+    <EditText
+        android:id="@+id/etEmailR"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/etUsernameR"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:textColorHint="@color/colorPrimaryDark"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="14sp"
+        android:drawableLeft="@drawable/email_r"/>
+
+    <EditText
+        android:id="@+id/etPasswordR"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/etEmailR"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:textColorHint="@color/colorPrimaryDark"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="14sp"
+        android:drawableLeft="@drawable/password_r"/>
+
+    <EditText
+        android:id="@+id/etConfirmPasswordR"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/etPasswordR"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:hint="Confirm Password"
+        android:inputType="textPassword"
+        android:textColorHint="@color/colorPrimaryDark"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="14sp"
+        android:drawableLeft="@drawable/password_r"/>
+
+    <LinearLayout
+        android:id="@+id/signupR"
+        android:layout_below="@+id/etConfirmPasswordR"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:background="@drawable/transparent_layout"
+        android:backgroundTint="@color/colorPrimaryDark">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="SIGN UP"
+            android:textAlignment="center"
+            android:paddingVertical="7dp"
+            android:textColor="#fff"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

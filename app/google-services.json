@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "702419365005",
+    "firebase_url": "https://woodpecker-74dd7.firebaseio.com",
+    "project_id": "woodpecker-74dd7",
+    "storage_bucket": "woodpecker-74dd7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:702419365005:android:36e862b00adfc1e0",
+        "android_client_info": {
+          "package_name": "com.example.pedrolemos.livrosfinal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "702419365005-rs3406uthrdkmepah36g8sakqe4tblbb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pedrolemos.livrosfinal",
+            "certificate_hash": "41f4e95c9595d00186f427f5326c5b909dbb1355"
+          }
+        },
+        {
+          "client_id": "702419365005-3addchabn62h47ijqf4d68eeucjense9.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "702419365005-3addchabn62h47ijqf4d68eeucjense9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC40BCJLsS8wkIomWJCaRx_TeuSM0Id5uo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "702419365005-3addchabn62h47ijqf4d68eeucjense9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

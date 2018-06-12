@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Woodpecker</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_categories">Categories</string>
+    <string name="menu_services">Scan</string>
+    <string name="menu_account">Account</string>
+    <string name="str_news_feed">Woodpecker</string>
+    <string name="backtologin">Back to Login</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment"></string>
+
+</resources>
