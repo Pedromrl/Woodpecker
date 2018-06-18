@@ -1,6 +1,9 @@
 package com.example.pedrolemos.livrosfinal;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -10,7 +13,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.pedrolemos.livrosfinal.utils.ConfirmPasswordDialog;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,6 +34,7 @@ public class SettingsActivity extends AppCompatActivity {
     private CardView change;
     private TextView deleteFavs, logout;
     private FirebaseAuth firebaseAuth;
+    private FirebaseUser firebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +42,9 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
 
         firebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbarr);
         newEmail = findViewById(R.id.et_new_email);
         change = findViewById(R.id.carta_change_email);
         deleteFavs = findViewById(R.id.apagar_favoritos);
@@ -47,9 +59,18 @@ public class SettingsActivity extends AppCompatActivity {
         change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String texto = newEmail.getText().toString().trim();
+               final String texto = newEmail.getText().toString().trim();
                 if (texto.isEmpty() || texto.equals("")) {
                     Toast.makeText(SettingsActivity.this, "Insert an email to be able to change your current one", Toast.LENGTH_SHORT).show();
+                }else{
+
+                    // step1) Reautenticar (confirmar password e email)
+                    ConfirmPasswordDialog confirmPasswordDialog = new ConfirmPasswordDialog();
+                    confirmPasswordDialog.show(getSupportFragmentManager(), getString(R.string.confirm_password_dialog));
+
+                    // step2) Ver se o email já existe na base de dados com o fetchProvidersForEmail
+
+                    // step3) Mudar o email
                 }
             }
         });

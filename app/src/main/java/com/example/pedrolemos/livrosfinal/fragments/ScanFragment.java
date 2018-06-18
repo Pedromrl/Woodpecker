@@ -92,6 +92,7 @@ public class ScanFragment extends Fragment implements ZXingScannerView.ResultHan
 
     private void requestPermission() {
         ActivityCompat.requestPermissions(getActivity(), new String[]{CAMERA}, REQUEST_CAMERA);
+
     }
 
     private boolean checkPermission() {
