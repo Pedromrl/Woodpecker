@@ -56,7 +56,6 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.Favo
         CardView card_viewFav;
 
 
-
         public FavoritoViewHolder(View v) {
             super(v);
             favoritosLayout = (LinearLayout) v.findViewById(R.id.favoritos_layout);
@@ -77,13 +76,10 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.Favo
             });*/
 
 
-
         }
 
 
     }
-
-
 
 
     public FavoritosAdapter(List<UserFavorites> favoritos, int rowLayout, Context context) {
@@ -94,11 +90,10 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.Favo
 
     @Override
     public FavoritosAdapter.FavoritoViewHolder onCreateViewHolder(ViewGroup parent,
-                                                            int viewType) {
+                                                                  int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(rowLayout, parent, false);
         return new FavoritoViewHolder(view);
     }
-
 
 
     @Override
@@ -106,81 +101,77 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.Favo
 
         YoYo.with(Techniques.SlideInUp).playOn(holder.card_viewFav);
 
-        try{
+        try {
             holder.idFav.setText(favoritos.get(position).toString());
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             holder.idFav.setText("NAOTEMID");
         }
 
 
         //TENTAR PÔR NOME
-        try{
+        try {
             int tamanho = favoritos.get(position).nome.length();
             String nomeLivro = favoritos.get(position).nome;
             String nomeLivroReduzido;
-            if (tamanho > 42){
+            if (tamanho > 42) {
                 nomeLivroReduzido = nomeLivro.substring(0, 30);
                 nomeLivroReduzido += "...";
                 holder.nomeFav.setText(nomeLivroReduzido);
-            }else{
+            } else {
                 holder.nomeFav.setText(nomeLivro);
             }
 
             //holder.nome.setText(livros.get(position).getTitle());
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             holder.nomeFav.setText("Unrecognized Book name");
         }
 
 
         //TENTAR PÔR AUTOR
-        try{
+        try {
             holder.autorFav.setText(favoritos.get(position).autor);
-        }catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             holder.autorFav.setText("Unrecognized Author");
         }
 
         //TENTAR PÔR DESCRIÇÃO
-       try{
-            if(favoritos.get(position).descricao.equals("")){
+        try {
+            if (favoritos.get(position).descricao.equals("")) {
                 holder.descricaoFav.setText("No description available");
-            }else{
+            } else {
                 holder.descricaoFav.setText(favoritos.get(position).descricao);
             }
 
-        }catch(Exception e){
+        } catch (Exception e) {
             holder.descricaoFav.setText("No description available");
         }
 
 
         //TENTAR PÔR IMAGEM
-        try{
+        try {
             Picasso.with(context).load(favoritos.get(position).capa).fit().centerCrop().into(holder.capaFav);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             Picasso.with(context).load(R.drawable.ic_close).fit().centerCrop().into(holder.capaFav);
         }
 
         //TENTAR PÔR CATEGORIA
-        try{
+        try {
             holder.categoriaFav.setText(favoritos.get(position).categoria);
-        }catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             holder.categoriaFav.setText("Unrecognized Author");
         }
 
         //TENTAR PÔR ID
-        try{
+        try {
             holder.idFav.setText(favoritos.get(position).hashCode());
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
-
-
-
 
 
     }
@@ -191,7 +182,7 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.Favo
     }
 
 
-    public void removeItem(final int position){
+    public void removeItem(final int position) {
 
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         String utilizador = firebaseAuth.getCurrentUser().getUid();
@@ -203,7 +194,7 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.Favo
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                for (DataSnapshot individual: dataSnapshot.getChildren()) {
+                for (DataSnapshot individual : dataSnapshot.getChildren()) {
                     String key = individual.getKey();
 
                     List<UserFavorites> fav = new ArrayList<>();
@@ -211,19 +202,19 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.Favo
                     fav.add(userFavorites);
 
 
-                    if(favoritos.get(position).nome.equals(fav.get(position).nome)){
+                    if (favoritos.get(position).nome.equals(fav.get(position).nome)) {
                         Log.w("POSITION:", String.valueOf(position));
                         Log.w("REF:", individual.getRef().toString());
 
                         DatabaseReference dt = dataSnapshot.child(key).getRef();
 
-                       dt.removeValue(new DatabaseReference.CompletionListener() {
-                           @Override
-                           public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                               Log.w("APAGOU?", "SIM!!!!!");
+                        dt.removeValue(new DatabaseReference.CompletionListener() {
+                            @Override
+                            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                                Log.w("APAGOU?", "SIM!!!!!");
 
-                           }
-                       });
+                            }
+                        });
                     }
                 }
             }

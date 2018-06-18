@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.pedrolemos.livrosfinal.LoginActivity;
 import com.example.pedrolemos.livrosfinal.R;
+import com.example.pedrolemos.livrosfinal.SettingsActivity;
 import com.example.pedrolemos.livrosfinal.adapters.FavoritosAdapter;
 import com.example.pedrolemos.livrosfinal.adapters.LivrosAdapter;
 import com.example.pedrolemos.livrosfinal.model.UserFavorites;
@@ -51,7 +52,7 @@ public class AccountFragment extends Fragment {
     AVLoadingIndicatorView avi;
 
     @BindView(R.id.logout)
-    TextView logout;
+    TextView settings;
 
     @BindView(R.id.favoritesString)
     TextView favoritesString;
@@ -71,13 +72,12 @@ public class AccountFragment extends Fragment {
 
         favoritesString.setVisibility(View.INVISIBLE);
 
-        logout.setOnClickListener(new View.OnClickListener() {
+        settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try{
-                    firebaseAuth.signOut();
-                    startActivity(new Intent(getContext(), LoginActivity.class));
-                    getActivity().finish();
+                    startActivity(new Intent(getContext(), SettingsActivity.class));
+                   // getActivity().finish();
                 }catch (Exception e){
                     e.printStackTrace();
                 }

@@ -53,8 +53,6 @@ public class ResultadosActivity extends AppCompatActivity {
     Toolbar toolbar;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,8 +80,8 @@ public class ResultadosActivity extends AppCompatActivity {
 
         String url = "https://www.googleapis.com/books/v1/volumes?q=subject:" + category + "&maxResults=40&key=AIzaSyD9mU0KD5bAf4ZcPAOhFR9JUIkA9U0o19c";
 
-        final RecyclerView recyclerView =  findViewById(R.id.livros_recycler_view);
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this,2);
+        final RecyclerView recyclerView = findViewById(R.id.livros_recycler_view);
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setVisibility(View.INVISIBLE);
 
@@ -92,7 +90,7 @@ public class ResultadosActivity extends AppCompatActivity {
         ApiInterface apiService =
                 ApiClient.getClient().create(ApiInterface.class);
 
-        if(isbn == null){
+        if (isbn == null) {
 
             Call<BookResponse> call = apiService.getBooksByCategory(url);
             call.enqueue(new Callback<BookResponse>() {
@@ -100,7 +98,7 @@ public class ResultadosActivity extends AppCompatActivity {
                 public void onResponse(Call<BookResponse> call, Response<BookResponse> response) {
                     int statusCode = response.code();
                     ArrayList<Items> api = new ArrayList<Items>();
-                    try{
+                    try {
                         Log.w(TAG, call.request().url().toString());
                         api = response.body().getItems();
 
@@ -118,8 +116,9 @@ public class ResultadosActivity extends AppCompatActivity {
                         recyclerView.setVisibility(View.VISIBLE);
 
                         recyclerView.addOnItemTouchListener(
-                                new RecyclerItemClickListener(ResultadosActivity.this, recyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
-                                    @Override public void onItemClick(View view, int position) {
+                                new RecyclerItemClickListener(ResultadosActivity.this, recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(View view, int position) {
                                         Intent intent = new Intent(ResultadosActivity.this, LivroActivity.class);
                                         String nome = ((TextView) recyclerView.findViewHolderForAdapterPosition(position).itemView.findViewById(R.id.id)).getText().toString();
                                         intent.putExtra("ISBN", nome);
@@ -128,12 +127,13 @@ public class ResultadosActivity extends AppCompatActivity {
 
                                     }
 
-                                    @Override public void onLongItemClick(View view, int position) {
+                                    @Override
+                                    public void onLongItemClick(View view, int position) {
                                         // do whatever
                                     }
                                 })
                         );
-                    }catch(Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
                         progressLayout.showEmpty(R.drawable.search, "No Search Results Found",
                                 "Unfortunately I could not find any results matching your search");
@@ -153,20 +153,7 @@ public class ResultadosActivity extends AppCompatActivity {
             });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-        }else{
+        } else {
             Call<BookResponse> call = apiService.getBookByISBN(isbn, "relevance", "28", API_KEY);
             call.enqueue(new Callback<BookResponse>() {
                 @Override
@@ -174,7 +161,7 @@ public class ResultadosActivity extends AppCompatActivity {
                     int statusCode = response.code();
 
                     ArrayList<Items> api = new ArrayList<Items>();
-                    try{
+                    try {
                         api = response.body().getItems();
                         List<VolumeInfo> livros = new ArrayList<VolumeInfo>();
 
@@ -190,8 +177,9 @@ public class ResultadosActivity extends AppCompatActivity {
                         recyclerView.setVisibility(View.VISIBLE);
 
                         recyclerView.addOnItemTouchListener(
-                                new RecyclerItemClickListener(ResultadosActivity.this, recyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
-                                    @Override public void onItemClick(View view, int position) {
+                                new RecyclerItemClickListener(ResultadosActivity.this, recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(View view, int position) {
                                         Intent intent = new Intent(ResultadosActivity.this, LivroActivity.class);
                                         String nome = ((TextView) recyclerView.findViewHolderForAdapterPosition(position).itemView.findViewById(R.id.id)).getText().toString();
                                         intent.putExtra("ISBN", nome);
@@ -200,12 +188,13 @@ public class ResultadosActivity extends AppCompatActivity {
 
                                     }
 
-                                    @Override public void onLongItemClick(View view, int position) {
+                                    @Override
+                                    public void onLongItemClick(View view, int position) {
                                         // do whatever
                                     }
                                 })
                         );
-                    }catch(Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
                         progressLayout.showEmpty(R.drawable.search, "No Search Results Found",
                                 "Unfortunately I could not find any results matching your search");
@@ -224,8 +213,6 @@ public class ResultadosActivity extends AppCompatActivity {
                 }
             });
         }
-
-
 
 
     }
