@@ -13,4 +13,9 @@ Lista completa de funcionalidades:
 - Scan de livros pelo ISBN
 - Adicionar favoritos
 - Ver favoritos
+- Eliminar a lista favoritos
+- Alterar Email
 - Logout
+
+
+Todas as libraries utilizadas estão sob a licensa do MIT, pelo que nenhuma infringe as regras de Copyright.
