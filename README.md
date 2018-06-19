@@ -16,3 +16,6 @@ Lista completa de funcionalidades:
 - Eliminar a lista favoritos
 - Alterar Email
 - Logout
+
+
+Todas as libraries utilizadas estão sob a licensa do MIT, pelo que nenhuma infringe as regras de Copyright.
