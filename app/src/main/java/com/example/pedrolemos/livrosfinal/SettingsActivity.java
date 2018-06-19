@@ -3,11 +3,13 @@ package com.example.pedrolemos.livrosfinal;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -21,13 +23,14 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.SignInMethodQueryResult;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class SettingsActivity extends AppCompatActivity {
+public class SettingsActivity extends AppCompatActivity implements ConfirmPasswordDialog.OnConfirmPasswordListener {
 
     private Toolbar toolbar;
     private EditText newEmail;
@@ -59,18 +62,13 @@ public class SettingsActivity extends AppCompatActivity {
         change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               final String texto = newEmail.getText().toString().trim();
+                final String texto = newEmail.getText().toString().trim();
                 if (texto.isEmpty() || texto.equals("")) {
                     Toast.makeText(SettingsActivity.this, "Insert an email to be able to change your current one", Toast.LENGTH_SHORT).show();
-                }else{
+                } else {
 
-                    // step1) Reautenticar (confirmar password e email)
                     ConfirmPasswordDialog confirmPasswordDialog = new ConfirmPasswordDialog();
                     confirmPasswordDialog.show(getSupportFragmentManager(), getString(R.string.confirm_password_dialog));
-
-                    // step2) Ver se o email já existe na base de dados com o fetchProvidersForEmail
-
-                    // step3) Mudar o email
                 }
             }
         });
@@ -110,6 +108,45 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onConfirmPassword(String password) {
+        Log.e("pass", password);
+
+        AuthCredential credential = EmailAuthProvider.getCredential(firebaseAuth.getCurrentUser().getEmail(), password);
+
+        firebaseUser.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    firebaseAuth.fetchSignInMethodsForEmail(newEmail.getText().toString()).addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
+                            if (task.isSuccessful()) {
+
+                                try {
+                                    if (task.getResult().getSignInMethods().size() == 1) {
+                                        Toast.makeText(SettingsActivity.this, "That email is already in use", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        firebaseUser.updateEmail(newEmail.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()) {
+                                                    Toast.makeText(SettingsActivity.this, "Your email has been updated!", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        });
+                                    }
+                                } catch (NullPointerException e) {
+                                    Log.e("Null", e.toString());
+                                }
+
+                            }
+                        }
+                    });
+                }
+            }
+        });
+    }
 }
 
 
