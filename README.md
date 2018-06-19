@@ -13,4 +13,6 @@ Lista completa de funcionalidades:
 - Scan de livros pelo ISBN
 - Adicionar favoritos
 - Ver favoritos
+- Eliminar a lista favoritos
+- Alterar Email
 - Logout
