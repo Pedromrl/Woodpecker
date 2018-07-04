@@ -69,6 +69,8 @@ dependencies {
     //Gráfico
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
 
+    implementation 'com.blankj:utilcode:1.17.0'
+
 
 }
 

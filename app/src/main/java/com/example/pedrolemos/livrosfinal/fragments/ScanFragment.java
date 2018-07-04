@@ -6,12 +6,16 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.PermissionInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,19 +46,23 @@ import retrofit2.Response;
 import static android.Manifest.permission.CAMERA;
 
 
-public class ScanFragment extends Fragment implements ZXingScannerView.ResultHandler{
+public class ScanFragment extends Fragment implements ZXingScannerView.ResultHandler {
 
     private static final int REQUEST_CAMERA = 1;
     private ZXingScannerView scannerView;
     private LinearLayout qrCameraLayout;
     private String TAG = "Scan Fragment";
+    private int flag = 0;
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View fragmentView =  inflater.inflate(R.layout.fragment_scan, container, false);
+        View fragmentView = inflater.inflate(R.layout.fragment_scan, container, false);
+
+
+
         qrCameraLayout = (LinearLayout) fragmentView.findViewById(R.id.qrLayout);
         scannerView = new ZXingScannerView(getActivity());
         scannerView.setLayoutParams(new LinearLayout.LayoutParams(
@@ -78,11 +86,29 @@ public class ScanFragment extends Fragment implements ZXingScannerView.ResultHan
 
         scannerView.setFormats(myformat);
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-            if (checkPermission()){
-                Toast.makeText(getContext(), "Permission is granted", Toast.LENGTH_LONG).show();
-            }else{
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkPermission()) {
+                //Toast.makeText(getContext(), "Permission is granted", Toast.LENGTH_LONG).show();
+
+            } else {
+                Log.d(TAG, "SCAN REJEITADO");
+
                 requestPermission();
+                /*try {
+                    Fragment fragCategory = new HomeFragment();
+                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.container, fragCategory);
+                    transaction.commit();
+                } catch (NullPointerException e) {
+                    Log.d(TAG, e.toString());
+                }
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                if (fm.getBackStackEntryCount() > 0) {
+                    fm.popBackStack();
+                } else {
+
+                }*/
+
             }
         }
 
@@ -96,20 +122,34 @@ public class ScanFragment extends Fragment implements ZXingScannerView.ResultHan
     }
 
     private boolean checkPermission() {
+
+        /*if (ActivityCompat.checkSelfPermission(getContext(), CAMERA) == PackageManager.PERMISSION_DENIED){
+            Log.d(TAG, "LOLFIXE4");
+            if (flag == 0){
+                getActivity().finish();
+                startActivity(new Intent(getActivity(), BottomViewActivity.class));
+            }
+            flag = 1;
+            return false;
+        }else{
+            return true;
+        }*/
         return (ActivityCompat.checkSelfPermission(getContext(), CAMERA) == PackageManager.PERMISSION_GRANTED);
+
     }
 
-    public void onRequestPermissionsResult(int requestCode, String permission[], int grantResults[]){
-        switch (requestCode){
-            case REQUEST_CAMERA :
-                if (grantResults.length > 0){
+    public void onRequestPermissionsResult(int requestCode, String permission[], int grantResults[]) {
+        switch (requestCode) {
+            case REQUEST_CAMERA:
+                if (grantResults.length > 0) {
                     boolean cameraAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-                    if (cameraAccepted){
+                    if (cameraAccepted) {
                         Toast.makeText(getContext(), "Permission GRANTED", Toast.LENGTH_LONG).show();
-                    }else{
+                    } else {
                         Toast.makeText(getContext(), "Permission DENIED", Toast.LENGTH_LONG).show();
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                            if(shouldShowRequestPermissionRationale(CAMERA)){
+
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            if (shouldShowRequestPermissionRationale(CAMERA)) {
                                 displayAlertMessage("You need to allow access for both permissions", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
@@ -118,6 +158,7 @@ public class ScanFragment extends Fragment implements ZXingScannerView.ResultHan
                                 });
                                 return;
                             }
+
                         }
                     }
                 }
@@ -126,35 +167,35 @@ public class ScanFragment extends Fragment implements ZXingScannerView.ResultHan
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-            if(checkPermission()){
-                if(scannerView == null){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkPermission()) {
+                if (scannerView == null) {
                     scannerView = new ZXingScannerView(getContext());
                     //setContentView(scannerView);
                 }
                 scannerView.setResultHandler(this);
                 scannerView.startCamera();
-            }else{
+            } else {
                 requestPermission();
             }
         }
     }
 
     @Override
-    public void onDestroy(){
+    public void onDestroy() {
         super.onDestroy();
         scannerView.stopCamera();
     }
 
     @Override
-    public void onPause(){
+    public void onPause() {
         super.onPause();
         scannerView.stopCamera();
     }
 
-    public void displayAlertMessage(String message, DialogInterface.OnClickListener listener){
+    public void displayAlertMessage(String message, DialogInterface.OnClickListener listener) {
         new AlertDialog.Builder(getContext())
                 .setMessage(message)
                 .setPositiveButton("OK", listener)
@@ -163,11 +204,10 @@ public class ScanFragment extends Fragment implements ZXingScannerView.ResultHan
                 .show();
     }
 
-    private void doMyAction(){
-        ZXingScannerView.ResultHandler a =  this;
+    private void doMyAction() {
+        ZXingScannerView.ResultHandler a = this;
         scannerView.resumeCameraPreview(a);
     }
-
 
 
     @Override
@@ -178,7 +218,7 @@ public class ScanFragment extends Fragment implements ZXingScannerView.ResultHan
         Log.w(TAG, scanResult);
         startActivity(intent);
         //doMyAction();
-       // getActivity().finish();
+        // getActivity().finish();
        /* AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Scan Result");
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {

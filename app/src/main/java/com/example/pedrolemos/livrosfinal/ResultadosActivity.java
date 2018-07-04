@@ -87,6 +87,7 @@ public class ResultadosActivity extends AppCompatActivity {
 
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
+
         ApiInterface apiService =
                 ApiClient.getClient().create(ApiInterface.class);
 
@@ -154,11 +155,13 @@ public class ResultadosActivity extends AppCompatActivity {
 
 
         } else {
+
             Call<BookResponse> call = apiService.getBookByISBN(isbn, "relevance", "28", API_KEY);
             call.enqueue(new Callback<BookResponse>() {
                 @Override
                 public void onResponse(Call<BookResponse> call, Response<BookResponse> response) {
                     int statusCode = response.code();
+
 
                     ArrayList<Items> api = new ArrayList<Items>();
                     try {

@@ -40,4 +40,24 @@
         app:layout_behavior="com.example.pedrolemos.livrosfinal.utils.BottomNavigationBehavior"
         design:menu="@menu/tab_menu"/>
 
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom">
+
+        <TextView
+            android:id="@+id/tv_connected"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:text="No Internet Connection"
+            android:textColor="@color/colorItem"
+            android:visibility="gone"
+            android:background="@android:color/holo_red_dark"/>
+
+    </RelativeLayout>
+
+
+
 </android.support.design.widget.CoordinatorLayout>

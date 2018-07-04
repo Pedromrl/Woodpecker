@@ -78,7 +78,6 @@ public class SettingsActivity extends AppCompatActivity implements ConfirmPasswo
                 if (texto.isEmpty() || texto.equals("")) {
                     Toast.makeText(SettingsActivity.this, "Insert an email to be able to change your current one", Toast.LENGTH_SHORT).show();
                 } else {
-
                     ConfirmPasswordDialog confirmPasswordDialog = new ConfirmPasswordDialog();
                     confirmPasswordDialog.show(getSupportFragmentManager(), getString(R.string.confirm_password_dialog));
                 }

@@ -9,22 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookResponse {
-   /* @SerializedName("items")
-    private List<Items> items;
-
-
-
-    public BookResponse(List<Items> items) {
-        this.items = items;
-    }
-
-    public List<Items> getItems() {
-        return items;
-    }
-
-    public void setItems(List<Items> items) {
-        this.items = items;
-    } */
 
    @SerializedName("items")
     private ArrayList<Items> items;

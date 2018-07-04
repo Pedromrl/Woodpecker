@@ -86,6 +86,7 @@ public class LoginActivity extends AppCompatActivity {
                                 editor.putString("pass", password.getText().toString());
                                 editor.apply();
                                 startActivity(new Intent(LoginActivity.this, BottomViewActivity.class));
+                                finish();
                             }else{
                                 Toast.makeText(LoginActivity.this, "Login failed. Check your credentials and/or your internet connection", Toast.LENGTH_LONG).show();
                                 aviView.setVisibility(View.INVISIBLE);
