@@ -19,16 +19,16 @@
     </style>
 
     <style name="Toolbar" parent="Theme.AppCompat">
-        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimary">@color/colorPrimaryDark</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:background">@color/colorPrimaryDark</item>
         <item name="android:textColorPrimary">#FFF</item>
         <item name="android:textColorSecondary">#FFF</item>
         <item name="actionMenuTextColor">#FFF</item>
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
         <item name="android:fitsSystemWindows">true</item>
-        <item name="android:windowBackground">@color/colorPrimary</item>
+        <item name="android:windowBackground">@color/colorPrimaryDark</item>
     </style>
 
 
