@@ -9,6 +9,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -35,6 +36,9 @@ public class RegisterActivity extends AppCompatActivity {
 
     @BindView(R.id.signupR)
     LinearLayout signup;
+
+    @BindView(R.id.btnBackToLoginR)
+    TextView backToLogin;
 
     private FirebaseAuth firebaseAuth;
 
@@ -66,6 +70,14 @@ public class RegisterActivity extends AppCompatActivity {
                 }else{
 
                 }
+            }
+        });
+
+        backToLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
             }
         });
 
