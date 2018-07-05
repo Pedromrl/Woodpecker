@@ -74,10 +74,10 @@ public final class BottomNavigationBehavior<V extends View> extends com.example.
             scrollingEnabled = enabled;
             if (!hideAlongSnackbar && ViewCompat.getTranslationY(child) != 0) {
                 ViewCompat.setTranslationY(child, 0);
-                hidden = false;
+               // hidden = false;
                 hideAlongSnackbar = true;
             }else if(hideAlongSnackbar){
-                hidden = true;
+                //hidden = true;
                 animateOffset(child, -child.getHeight());
             }
         }
@@ -117,13 +117,13 @@ public final class BottomNavigationBehavior<V extends View> extends com.example.
 
     private void handleDirection(V child, @ScrollDirection int scrollDirection) {
         if (!scrollingEnabled) return;
-        if (scrollDirection == ScrollDirection.SCROLL_DIRECTION_DOWN && hidden) {
+      /*  if (scrollDirection == ScrollDirection.SCROLL_DIRECTION_DOWN && hidden) {
             hidden = false;
             animateOffset(child, 0);
         } else if (scrollDirection == ScrollDirection.SCROLL_DIRECTION_UP && !hidden) {
             hidden = true;
             animateOffset(child, child.getHeight());
-        }
+        } */
     }
 
     @Override
@@ -170,12 +170,12 @@ public final class BottomNavigationBehavior<V extends View> extends com.example.
     }
 
     public void setHidden(V view, boolean bottomLayoutHidden) {
-        if (!bottomLayoutHidden && hidden) {
+        /*if (!bottomLayoutHidden && hidden) {
             animateOffset(view, 0);
         } else if (bottomLayoutHidden && !hidden) {
             animateOffset(view, -view.getHeight());
         }
-        hidden = bottomLayoutHidden;
+        hidden = bottomLayoutHidden; */
     }
 
     private interface BottomNavigationWithSnackbar {

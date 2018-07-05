@@ -1,63 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:design="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/product_clMainView"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <FrameLayout
-        android:id="@+id/container"
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/product_clMainView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-    </FrameLayout>
-
-    <com.yalantis.jellytoolbar.widget.JellyToolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
-
-        app:cancelIcon="@drawable/ic_close"
-        app:endColor="@color/colorStart"
-        app:icon="@drawable/ic_search"
-        app:startColor="@color/colorEnd"
-        app:title="@string/str_news_feed"
-        app:titleTextColor="@android:color/white" />
+        android:layout_height="match_parent">
 
 
+        <FrameLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+        </FrameLayout>
+
+        <com.yalantis.jellytoolbar.widget.JellyToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+
+            app:cancelIcon="@drawable/ic_close"
+            app:endColor="@color/colorStart"
+            app:icon="@drawable/ic_search"
+            app:startColor="@color/colorEnd"
+            app:title="@string/str_news_feed"
+            app:titleTextColor="@android:color/white" />
 
 
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/bottom_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="@android:color/white"
-        app:layout_behavior="com.example.pedrolemos.livrosfinal.utils.BottomNavigationBehavior"
-        design:menu="@menu/tab_menu"/>
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/bottom_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@android:color/white"
+            app:layout_behavior="com.example.pedrolemos.livrosfinal.utils.BottomNavigationBehavior"
+            design:menu="@menu/tab_menu" />
+
+
+    </android.support.design.widget.CoordinatorLayout>
+
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom">
+        android:layout_gravity="bottom"
+        android:gravity="bottom">
 
         <TextView
             android:id="@+id/tv_connected"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_alignParentBottom="true"
+            android:background="@android:color/holo_red_dark"
+            android:foregroundGravity="bottom"
             android:gravity="center"
             android:text="No Internet Connection"
             android:textColor="@color/colorItem"
-            android:visibility="gone"
-            android:background="@android:color/holo_red_dark"/>
+            android:visibility="gone" />
 
     </RelativeLayout>
 
 
-
-</android.support.design.widget.CoordinatorLayout>
+</RelativeLayout>
