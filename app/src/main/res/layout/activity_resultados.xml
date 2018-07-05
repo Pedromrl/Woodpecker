@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:visibility="visible"
-            app:indicatorColor="@color/colorPrimary"
+            app:indicatorColor="@color/colorStart"
             app:indicatorName="LineScalePulseOutRapidIndicator" />
 
         <android.support.v7.widget.RecyclerView

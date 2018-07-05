@@ -119,7 +119,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
                     android:text="About the book"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/colorStart"
                     android:textStyle="bold" />
 
 
@@ -160,7 +160,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
                     android:text="Description"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/colorStart"
                     android:textStyle="bold" />
 
                 <TextView android:id="@+id/tvDescricao"

@@ -24,9 +24,7 @@
                 android:id="@+id/capaFav"
                 android:layout_width="170dp"
                 android:layout_height="@dimen/album_cover_height"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:clickable="true"
-                android:scaleType="fitXY" />
+                />
 
             <TextView
                 android:layout_width="match_parent"

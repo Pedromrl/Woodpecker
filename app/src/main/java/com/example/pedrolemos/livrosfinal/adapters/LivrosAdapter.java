@@ -127,7 +127,7 @@ public class LivrosAdapter extends RecyclerView.Adapter<LivrosAdapter.LivroViewH
             Picasso.with(context).load(livros.get(position).getImageLinks().getThumbnail()).fit().centerCrop().into(holder.capa);
         }catch (Exception e){
             e.printStackTrace();
-            Picasso.with(context).load(R.drawable.ic_close).fit().centerCrop().into(holder.capa);
+            Picasso.with(context).load(R.drawable.default_img).fit().centerCrop().into(holder.capa);
         }
 
 

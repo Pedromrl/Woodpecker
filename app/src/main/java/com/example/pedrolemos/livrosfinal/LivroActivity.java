@@ -207,8 +207,8 @@ public class LivroActivity extends AppCompatActivity {
             capaFire = api.getVolumeInfo().getImageLinks().getThumbnail();
         }catch (Exception e){
             e.printStackTrace();
-            Picasso.with(LivroActivity.this).load(R.drawable.ic_close).fit().centerCrop().into(capa);
-            capaFire = "R.drawable.ic_close";
+            Picasso.with(LivroActivity.this).load(R.drawable.default_img).fit().centerCrop().into(capa);
+            capaFire = "R.drawable.default_img";
         }
 
         //TENTAR TITULO

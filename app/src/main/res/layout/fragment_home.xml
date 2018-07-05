@@ -37,7 +37,7 @@
                 android:backgroundTint="@color/colorTransparent"
                 android:gravity="center_vertical"
                 android:maxLines="1"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/colorStart"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -59,7 +59,7 @@
                 android:backgroundTint="@color/colorTransparent"
                 android:gravity="center_vertical"
                 android:maxLines="1"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/colorStart"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 

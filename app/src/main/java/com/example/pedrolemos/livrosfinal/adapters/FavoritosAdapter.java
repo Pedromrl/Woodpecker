@@ -152,10 +152,15 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.Favo
 
         //TENTAR PÔR IMAGEM
         try {
-            Picasso.with(context).load(favoritos.get(position).capa).fit().centerCrop().into(holder.capaFav);
+            if(favoritos.get(position).capa.equals("R.drawable.default_img")){
+                Picasso.with(context).load(R.drawable.default_img).fit().centerCrop().into(holder.capaFav);
+            }else{
+                Picasso.with(context).load(favoritos.get(position).capa).fit().centerCrop().into(holder.capaFav);
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
-            Picasso.with(context).load(R.drawable.ic_close).fit().centerCrop().into(holder.capaFav);
+            Picasso.with(context).load(R.drawable.default_img).fit().centerCrop().into(holder.capaFav);
         }
 
         //TENTAR PÔR CATEGORIA
