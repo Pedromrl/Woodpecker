@@ -1,8 +1,12 @@
 package com.example.pedrolemos.livrosfinal;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.os.Build;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +20,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.pedrolemos.livrosfinal.receivers.NetworkChangeReceiver;
 import com.example.pedrolemos.livrosfinal.utils.ConfirmPasswordDialog;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -39,6 +44,7 @@ public class SettingsActivity extends AppCompatActivity implements ConfirmPasswo
     private TextView deleteFavs, logout;
     private FirebaseAuth firebaseAuth;
     private FirebaseUser firebaseUser;
+    private TextView tv_connected;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -63,6 +69,15 @@ public class SettingsActivity extends AppCompatActivity implements ConfirmPasswo
         change = findViewById(R.id.carta_change_email);
         deleteFavs = findViewById(R.id.apagar_favoritos);
         logout = findViewById(R.id.logout_final);
+
+        tv_connected = findViewById(R.id.tv_connectedSettings);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            NetworkChangeReceiver mNetworkReceiver = new NetworkChangeReceiver();
+            registerReceiver(mNetworkReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+        }
+
+        registerReceiver();
 
 
         /** Indicar que a Action Bar é a toolbar que criámos, tirar o seu título automático e acrescentar a seta para voltar */
@@ -157,6 +172,50 @@ public class SettingsActivity extends AppCompatActivity implements ConfirmPasswo
                 }
             }
         });
+    }
+
+    /**
+     * This is internal BroadcastReceiver which get status from external receiver(NetworkChangeReceiver)
+     */
+    SettingsActivity.InternalNetworkChangeReceiver internalNetworkChangeReceiver = new SettingsActivity.InternalNetworkChangeReceiver();
+
+    class InternalNetworkChangeReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            if(intent.getStringExtra("status").equalsIgnoreCase("internet connected")){
+                tv_connected.setVisibility(View.GONE);
+            }
+            else{
+                tv_connected.setVisibility(View.VISIBLE);
+            }
+            //Toast.makeText(HomeActivity.this, intent.getStringExtra("status"), Toast.LENGTH_LONG).show();
+
+        }
+    }
+
+
+    /**
+     * This method is responsible to register receiver with NETWORK_CHANGE_ACTION.
+     */
+    private void registerReceiver() {
+        try {
+            IntentFilter intentFilter = new IntentFilter();
+            intentFilter.addAction(NetworkChangeReceiver.NETWORK_CHANGE_ACTION);
+            registerReceiver(internalNetworkChangeReceiver, intentFilter);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        try {
+            unregisterReceiver(internalNetworkChangeReceiver);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        super.onDestroy();
     }
 }
 

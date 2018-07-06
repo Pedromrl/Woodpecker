@@ -50,8 +50,31 @@
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="0dp" />
 
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:gravity="bottom">
+
+            <TextView
+                android:id="@+id/tv_connectedResultados"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_alignParentBottom="true"
+                android:background="@android:color/holo_red_dark"
+                android:foregroundGravity="bottom"
+                android:gravity="center"
+                android:text="No Internet Connection"
+                android:textColor="@color/colorItem"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
+
 
     </com.vlonjatg.progressactivity.ProgressRelativeLayout>
+
+
 
 
 </LinearLayout>

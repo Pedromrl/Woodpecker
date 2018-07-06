@@ -1,5 +1,12 @@
 package com.example.pedrolemos.livrosfinal;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.Build;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -12,9 +19,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.NetworkUtils;
+import com.blankj.utilcode.util.Utils;
 import com.example.pedrolemos.livrosfinal.model.BookResponse;
 import com.example.pedrolemos.livrosfinal.model.Items;
 import com.example.pedrolemos.livrosfinal.model.UserFavorites;
+import com.example.pedrolemos.livrosfinal.receivers.NetworkChangeReceiver;
 import com.example.pedrolemos.livrosfinal.rest.ApiClient;
 import com.example.pedrolemos.livrosfinal.rest.ApiInterface;
 import com.google.firebase.auth.FirebaseAuth;
@@ -61,6 +71,9 @@ public class LivroActivity extends AppCompatActivity {
     @BindView(R.id.fab)
     FloatingActionButton fab;
 
+    @BindView(R.id.tv_connectedLivro)
+    TextView tv_connected;
+
    /* @BindView(R.id.avi)
     AVLoadingIndicatorView avi; */
 
@@ -82,6 +95,22 @@ public class LivroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_livro);
 
         ButterKnife.bind(this);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            NetworkChangeReceiver mNetworkReceiver = new NetworkChangeReceiver();
+            registerReceiver(mNetworkReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+        }
+
+        registerReceiver();
+
+
+        if (!isNetworkAvailable()){
+            progressLayout.showEmpty(R.drawable.wifi_img, "You have no Internet Connection",
+                    "To check this book's information, please connect to the internet and try again!");
+        }
+
+
+
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -137,7 +166,9 @@ public class LivroActivity extends AppCompatActivity {
                     //TENTAR VER SE HA RESULTADOS
                     try{
                         Items result = response.body().getItems().get(0);
-                        alterarTexto(result);
+                            alterarTexto(result);
+
+
                       //  avi.hide();
                         depoisLoading();
 
@@ -146,7 +177,6 @@ public class LivroActivity extends AppCompatActivity {
                     //   avi.hide();
                         progressLayout.showEmpty(R.drawable.search, "Sorry!",
                                 "Google doesn't have any more information about this book.");
-
 
                     }
 
@@ -317,6 +347,59 @@ public class LivroActivity extends AppCompatActivity {
         super.onBackPressed();
         this.finish();
     }
+
+
+    /**
+     * This is internal BroadcastReceiver which get status from external receiver(NetworkChangeReceiver)
+     */
+    LivroActivity.InternalNetworkChangeReceiver internalNetworkChangeReceiver = new LivroActivity.InternalNetworkChangeReceiver();
+
+    class InternalNetworkChangeReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            if(intent.getStringExtra("status").equalsIgnoreCase("internet connected")){
+                tv_connected.setVisibility(View.GONE);
+            }
+            else{
+                tv_connected.setVisibility(View.VISIBLE);
+            }
+            //Toast.makeText(HomeActivity.this, intent.getStringExtra("status"), Toast.LENGTH_LONG).show();
+
+        }
+    }
+
+
+    /**
+     * This method is responsible to register receiver with NETWORK_CHANGE_ACTION.
+     */
+    private void registerReceiver() {
+        try {
+            IntentFilter intentFilter = new IntentFilter();
+            intentFilter.addAction(NetworkChangeReceiver.NETWORK_CHANGE_ACTION);
+            registerReceiver(internalNetworkChangeReceiver, intentFilter);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        try {
+            unregisterReceiver(internalNetworkChangeReceiver);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        super.onDestroy();
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting();
+    }
+
 
 
 

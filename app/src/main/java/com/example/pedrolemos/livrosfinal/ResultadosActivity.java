@@ -1,7 +1,13 @@
 package com.example.pedrolemos.livrosfinal;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.Build;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,10 +23,13 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.NetworkUtils;
+import com.blankj.utilcode.util.Utils;
 import com.example.pedrolemos.livrosfinal.adapters.LivrosAdapter;
 import com.example.pedrolemos.livrosfinal.model.BookResponse;
 import com.example.pedrolemos.livrosfinal.model.Items;
 import com.example.pedrolemos.livrosfinal.model.VolumeInfo;
+import com.example.pedrolemos.livrosfinal.receivers.NetworkChangeReceiver;
 import com.example.pedrolemos.livrosfinal.rest.ApiClient;
 import com.example.pedrolemos.livrosfinal.rest.ApiInterface;
 import com.example.pedrolemos.livrosfinal.utils.RecyclerItemClickListener;
@@ -52,6 +61,8 @@ public class ResultadosActivity extends AppCompatActivity {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
+    @BindView(R.id.tv_connectedResultados)
+    TextView tv_connected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +70,18 @@ public class ResultadosActivity extends AppCompatActivity {
         setContentView(R.layout.activity_resultados);
 
         ButterKnife.bind(this);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            NetworkChangeReceiver mNetworkReceiver = new NetworkChangeReceiver();
+            registerReceiver(mNetworkReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+        }
+
+        registerReceiver();
+
+        if (!isNetworkAvailable()){
+            progressLayout.showEmpty(R.drawable.wifi_img, "You have no Internet Connection",
+                    "To check this book's information, please connect to the internet and try again!");
+        }
 
 
         setSupportActionBar(toolbar);
@@ -183,13 +206,14 @@ public class ResultadosActivity extends AppCompatActivity {
                                 new RecyclerItemClickListener(ResultadosActivity.this, recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
                                     @Override
                                     public void onItemClick(View view, int position) {
+
                                         Intent intent = new Intent(ResultadosActivity.this, LivroActivity.class);
                                         String nome = ((TextView) recyclerView.findViewHolderForAdapterPosition(position).itemView.findViewById(R.id.id)).getText().toString();
                                         intent.putExtra("ISBN", nome);
                                         startActivity(intent);
                                         overridePendingTransition(R.anim.enter, R.anim.exit);
-
                                     }
+
 
                                     @Override
                                     public void onLongItemClick(View view, int position) {
@@ -225,6 +249,57 @@ public class ResultadosActivity extends AppCompatActivity {
         super.onBackPressed();
         this.finish();
     }
+
+    /**
+     * This is internal BroadcastReceiver which get status from external receiver(NetworkChangeReceiver)
+     */
+    ResultadosActivity.InternalNetworkChangeReceiver internalNetworkChangeReceiver = new ResultadosActivity.InternalNetworkChangeReceiver();
+
+    class InternalNetworkChangeReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            if (intent.getStringExtra("status").equalsIgnoreCase("internet connected")) {
+                tv_connected.setVisibility(View.GONE);
+            } else {
+                tv_connected.setVisibility(View.VISIBLE);
+            }
+            //Toast.makeText(HomeActivity.this, intent.getStringExtra("status"), Toast.LENGTH_LONG).show();
+
+        }
+    }
+
+
+    /**
+     * This method is responsible to register receiver with NETWORK_CHANGE_ACTION.
+     */
+    private void registerReceiver() {
+        try {
+            IntentFilter intentFilter = new IntentFilter();
+            intentFilter.addAction(NetworkChangeReceiver.NETWORK_CHANGE_ACTION);
+            registerReceiver(internalNetworkChangeReceiver, intentFilter);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        try {
+            unregisterReceiver(internalNetworkChangeReceiver);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        super.onDestroy();
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting();
+    }
+
 
 
 }

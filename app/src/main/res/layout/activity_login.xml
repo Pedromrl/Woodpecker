@@ -30,18 +30,17 @@
         android:textColor="@android:color/white"/>
 
 
-
-
-
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/login"
-        android:layout_below="@+id/logotext"
+        android:layout_below="@+id/etPassword"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="20dp"
         android:layout_width="250dp"
         android:layout_height="40dp"
         android:background="@drawable/transparent_layout"
-        android:backgroundTint="@android:color/white">
+        android:backgroundTint="@android:color/white"
+
+        >
 
         <TextView
             android:layout_width="match_parent"
@@ -53,13 +52,13 @@
             android:textSize="18sp" />
 
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/signup"
         android:layout_below="@+id/login"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_width="250dp"
         android:layout_height="40dp"
         android:background="@drawable/transparent_layout">
@@ -81,7 +80,7 @@
         android:layout_height="40dp"
         android:layout_below="@+id/logotext"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:drawableLeft="@drawable/email"
         android:hint="Email"
         android:inputType="textEmailAddress"
@@ -121,17 +120,20 @@
         android:id="@+id/aviView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/backgroundlogin">
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/backgroundlogin"
+        android:visibility="visible">
 
         <com.wang.avi.AVLoadingIndicatorView
             android:id="@+id/avi"
+            style="@style/AVLoadingIndicatorView.Large"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            style="@style/AVLoadingIndicatorView.Large"
             android:visibility="visible"
-            app:indicatorName="LineScalePulseOutRapidIndicator"
-            app:indicatorColor="@android:color/white" />
+            app:indicatorColor="@android:color/white"
+            app:indicatorName="LineScalePulseOutRapidIndicator" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -143,7 +145,29 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
+
     </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:gravity="bottom">
+
+        <TextView
+            android:id="@+id/tv_connectedLogin"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_alignParentBottom="true"
+            android:background="@android:color/holo_red_dark"
+            android:foregroundGravity="bottom"
+            android:gravity="center"
+            android:text="No Internet Connection"
+            android:textColor="@color/colorItem"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
 
 
 
