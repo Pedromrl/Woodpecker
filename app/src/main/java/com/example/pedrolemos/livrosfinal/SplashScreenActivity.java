@@ -25,7 +25,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         public void run(){
             try{
                 //Se funcionar espera 1 segundo
-                sleep(1000 * sleeptimer);
+                sleep(300 * sleeptimer);
             }catch(InterruptedException e){
                 //Se não funcionar escreve isso no stackstrace
                 e.printStackTrace();
