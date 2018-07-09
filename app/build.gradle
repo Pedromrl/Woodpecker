@@ -4,7 +4,7 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.example.pedrolemos.livrosfinal"
-        minSdkVersion 21
+        minSdkVersion 23
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
@@ -69,7 +69,11 @@ dependencies {
     //Gráfico
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
 
+    //Utilidades (verificar estado da internet, etc)
     implementation 'com.blankj:utilcode:1.17.0'
+
+    //Gerir permissões
+    implementation 'com.github.karanchuri:PermissionManager:0.1.0'
 
 
 }

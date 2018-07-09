@@ -1,6 +1,7 @@
 package com.example.pedrolemos.livrosfinal.fragments;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -10,6 +11,8 @@ import android.content.pm.PermissionInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -32,6 +35,9 @@ import com.example.pedrolemos.livrosfinal.rest.ApiClient;
 import com.example.pedrolemos.livrosfinal.rest.ApiInterface;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
+import com.karan.churi.PermissionManager.PermissionManager;
+import com.vlonjatg.progressactivity.ProgressLinearLayout;
+import com.vlonjatg.progressactivity.ProgressRelativeLayout;
 
 import org.xmlpull.v1.XmlPullParser;
 
@@ -50,9 +56,11 @@ public class ScanFragment extends Fragment implements ZXingScannerView.ResultHan
 
     private static final int REQUEST_CAMERA = 1;
     private ZXingScannerView scannerView;
-    private LinearLayout qrCameraLayout;
+    private ProgressLinearLayout qrCameraLayout;
     private String TAG = "Scan Fragment";
     private int flag = 0;
+
+    private PermissionManager permissionManager;
 
 
     @Nullable
@@ -62,8 +70,7 @@ public class ScanFragment extends Fragment implements ZXingScannerView.ResultHan
         View fragmentView = inflater.inflate(R.layout.fragment_scan, container, false);
 
 
-
-        qrCameraLayout = (LinearLayout) fragmentView.findViewById(R.id.qrLayout);
+        qrCameraLayout = fragmentView.findViewById(R.id.qrLayout);
         scannerView = new ZXingScannerView(getActivity());
         scannerView.setLayoutParams(new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
@@ -75,102 +82,48 @@ public class ScanFragment extends Fragment implements ZXingScannerView.ResultHan
         List<BarcodeFormat> myformat = new ArrayList<>();
         myformat.add(BarcodeFormat.EAN_13);
         myformat.add(BarcodeFormat.EAN_8);
-        myformat.add(BarcodeFormat.RSS_14);
+      /*  myformat.add(BarcodeFormat.RSS_14);
         myformat.add(BarcodeFormat.CODE_39);
         myformat.add(BarcodeFormat.CODE_93);
         myformat.add(BarcodeFormat.CODE_128);
         myformat.add(BarcodeFormat.ITF);
         myformat.add(BarcodeFormat.CODABAR);
         myformat.add(BarcodeFormat.DATA_MATRIX);
-        myformat.add(BarcodeFormat.PDF_417);
+        myformat.add(BarcodeFormat.PDF_417); */
 
         scannerView.setFormats(myformat);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (checkPermission()) {
-                //Toast.makeText(getContext(), "Permission is granted", Toast.LENGTH_LONG).show();
+        permissionManager = new PermissionManager() {
+        };
+        permissionManager.checkAndRequestPermissions(getActivity());
 
-            } else {
-                Log.d(TAG, "SCAN REJEITADO");
-
-                requestPermission();
-                /*try {
-                    Fragment fragCategory = new HomeFragment();
-                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                    transaction.replace(R.id.container, fragCategory);
-                    transaction.commit();
-                } catch (NullPointerException e) {
-                    Log.d(TAG, e.toString());
-                }
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-                if (fm.getBackStackEntryCount() > 0) {
-                    fm.popBackStack();
-                } else {
-
-                }*/
-
-            }
-        }
 
         return fragmentView;
 
     }
 
-    private void requestPermission() {
-        ActivityCompat.requestPermissions(getActivity(), new String[]{CAMERA}, REQUEST_CAMERA);
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        ArrayList<String> granted = permissionManager.getStatus().get(0).granted;
+        ArrayList<String> denied = permissionManager.getStatus().get(0).denied;
+
+        for (String item : granted)
+            doMyAction();
+
+        for (String item : denied)
+            Toast.makeText(getContext(), "Permission Denied", Toast.LENGTH_SHORT).show();
 
     }
 
-    private boolean checkPermission() {
-
-        /*if (ActivityCompat.checkSelfPermission(getContext(), CAMERA) == PackageManager.PERMISSION_DENIED){
-            Log.d(TAG, "LOLFIXE4");
-            if (flag == 0){
-                getActivity().finish();
-                startActivity(new Intent(getActivity(), BottomViewActivity.class));
-            }
-            flag = 1;
-            return false;
-        }else{
-            return true;
-        }*/
-        return (ActivityCompat.checkSelfPermission(getContext(), CAMERA) == PackageManager.PERMISSION_GRANTED);
-
-    }
-
-    public void onRequestPermissionsResult(int requestCode, String permission[], int grantResults[]) {
-        switch (requestCode) {
-            case REQUEST_CAMERA:
-                if (grantResults.length > 0) {
-                    boolean cameraAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-                    if (cameraAccepted) {
-                        Toast.makeText(getContext(), "Permission GRANTED", Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(getContext(), "Permission DENIED", Toast.LENGTH_LONG).show();
-
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                            if (shouldShowRequestPermissionRationale(CAMERA)) {
-                                displayAlertMessage("You need to allow access for both permissions", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        requestPermissions(new String[]{CAMERA}, REQUEST_CAMERA);
-                                    }
-                                });
-                                return;
-                            }
-
-                        }
-                    }
-                }
-                break;
-        }
-    }
 
     @Override
     public void onResume() {
         super.onResume();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (checkPermission()) {
+            if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA)
+                    != PackageManager.PERMISSION_DENIED) {
                 if (scannerView == null) {
                     scannerView = new ZXingScannerView(getContext());
                     //setContentView(scannerView);
@@ -178,10 +131,36 @@ public class ScanFragment extends Fragment implements ZXingScannerView.ResultHan
                 scannerView.setResultHandler(this);
                 scannerView.startCamera();
             } else {
-                requestPermission();
+                View.OnClickListener errorClickListener = new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                       // startInstalledAppDetailsActivity(getActivity());
+                        Intent intent = new Intent();
+                        intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                        Uri uri = Uri.fromParts("package", getContext().getPackageName(), null);
+                        intent.setData(uri);
+                        startActivity(intent);
+                    }
+                };
+                qrCameraLayout.showError(R.drawable.sad, "Oh, no!",
+                        "You didn't accept the permission to use the Camera feature", "Try Again", errorClickListener);
             }
         }
     }
+
+   /* public static void startInstalledAppDetailsActivity(final Activity context) {
+        if (context == null) {
+            return;
+        }
+        final Intent i = new Intent();
+        i.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        i.addCategory(Intent.CATEGORY_DEFAULT);
+        i.setData(Uri.parse("package:" + context.getPackageName()));
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        i.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+        context.startActivity(i);
+    }*/
 
     @Override
     public void onDestroy() {
@@ -193,15 +172,6 @@ public class ScanFragment extends Fragment implements ZXingScannerView.ResultHan
     public void onPause() {
         super.onPause();
         scannerView.stopCamera();
-    }
-
-    public void displayAlertMessage(String message, DialogInterface.OnClickListener listener) {
-        new AlertDialog.Builder(getContext())
-                .setMessage(message)
-                .setPositiveButton("OK", listener)
-                .setNegativeButton("Cancel", null)
-                .create()
-                .show();
     }
 
     private void doMyAction() {
@@ -217,27 +187,6 @@ public class ScanFragment extends Fragment implements ZXingScannerView.ResultHan
         intent.putExtra("ISBN", scanResult);
         Log.w(TAG, scanResult);
         startActivity(intent);
-        //doMyAction();
-        // getActivity().finish();
-       /* AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle("Scan Result");
-        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                doMyAction();
-            }
-        });
-        builder.setNeutralButton("Visit", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(scanResult));
-                startActivity(intent);
-            }
-        });
-
-        builder.setMessage(scanResult);
-        AlertDialog alert = builder.create();
-        alert.show(); */
     }
 
 

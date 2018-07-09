@@ -103,18 +103,6 @@ public class BottomViewActivity extends AppCompatActivity {
 
         registerReceiver();
 
-        Utils.init(getApplication());
-
-        /*if(!NetworkUtils.isWifiConnected()){
-            Toast.makeText(BottomViewActivity.this, "NAO TENS NET FDP", Toast.LENGTH_SHORT).show();
-        }*
-
-
-        //Set Toolbar
-      /*  setSupportActionBar(mToolbar);
-        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(getString(R.string.menu_home)); */
-
         toolbar = (JellyToolbar) findViewById(R.id.toolbar);
         // toolbar.getToolbar().setNavigationIcon(R.drawable.ic_menu);
 
