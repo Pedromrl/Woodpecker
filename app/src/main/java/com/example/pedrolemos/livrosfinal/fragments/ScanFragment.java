@@ -105,8 +105,6 @@ public class ScanFragment extends Fragment implements ZXingScannerView.ResultHan
         permissionManager.checkAndRequestPermissions(getActivity());
 
 
-
-
         return fragmentView;
 
     }
@@ -118,14 +116,13 @@ public class ScanFragment extends Fragment implements ZXingScannerView.ResultHan
         ArrayList<String> granted = permissionManager.getStatus().get(0).granted;
         ArrayList<String> denied = permissionManager.getStatus().get(0).denied;
 
-        for (String item : granted){
+        for (String item : granted) {
             doMyAction();
         }
 
 
         for (String item : denied)
             Toast.makeText(getContext(), "Permission Denied", Toast.LENGTH_SHORT).show();
-
 
 
     }
@@ -144,9 +141,6 @@ public class ScanFragment extends Fragment implements ZXingScannerView.ResultHan
                 permissionDeniedLayout.setVisibility(View.GONE);
                 scannerView.setResultHandler(this);
                 scannerView.startCamera();
-
-
-
 
 
             } else {
@@ -211,8 +205,6 @@ public class ScanFragment extends Fragment implements ZXingScannerView.ResultHan
         Log.w(TAG, scanResult);
         startActivity(intent);
     }
-
-
 
 
 }

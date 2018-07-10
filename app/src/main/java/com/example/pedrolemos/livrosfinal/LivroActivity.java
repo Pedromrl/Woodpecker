@@ -260,8 +260,6 @@ public class LivroActivity extends AppCompatActivity {
                     }
 
                 }
-
-
             }
         });
 

@@ -21,12 +21,12 @@ public class SplashScreenActivity extends AppCompatActivity {
     }
 
     //Pôr o splashscreen a funcionar
-    private class LogoLauncher extends Thread{
-        public void run(){
-            try{
+    private class LogoLauncher extends Thread {
+        public void run() {
+            try {
                 //Se funcionar espera 1 segundo
                 sleep(300 * sleeptimer);
-            }catch(InterruptedException e){
+            } catch (InterruptedException e) {
                 //Se não funcionar escreve isso no stackstrace
                 e.printStackTrace();
             }

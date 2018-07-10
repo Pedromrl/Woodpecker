@@ -71,19 +71,19 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(validar()){
+                if (validar()) {
                     firebaseAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful()){
+                            if (task.isSuccessful()) {
                                 Toast.makeText(RegisterActivity.this, "User was registered successfuly", Toast.LENGTH_SHORT).show();
                                 fazerLogin(email.getText().toString(), password.getText().toString());
-                            }else{
+                            } else {
                                 Toast.makeText(RegisterActivity.this, "The registration failed", Toast.LENGTH_LONG).show();
                             }
                         }
                     });
-                }else{
+                } else {
 
                 }
             }
@@ -100,7 +100,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-    private Boolean validar(){
+    private Boolean validar() {
         String user = username.getText().toString().trim();
         String mail = email.getText().toString().trim();
         String pass = password.getText().toString().trim();
@@ -108,7 +108,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
         /** Validar se o email está na forma correta */
-        if (!Patterns.EMAIL_ADDRESS.matcher(mail).matches()){
+        if (!Patterns.EMAIL_ADDRESS.matcher(mail).matches()) {
             Toast.makeText(RegisterActivity.this, "Enter a valid email", Toast.LENGTH_LONG).show();
             return false;
         }
@@ -117,13 +117,12 @@ public class RegisterActivity extends AppCompatActivity {
         if (user.isEmpty() || mail.isEmpty() || pass.isEmpty() || confirm.isEmpty()) {
             Toast.makeText(RegisterActivity.this, "Please don't leave any field empty", Toast.LENGTH_LONG).show();
             return false;
-        }else{
+        } else {
             /** Verificar se a password é igual à sua confirmação */
-            if(pass.equals(confirm)){
+            if (pass.equals(confirm)) {
 
                 return true;
-            }
-            else{
+            } else {
                 Toast.makeText(RegisterActivity.this, "The confirm password isn't the same as the password", Toast.LENGTH_LONG).show();
                 return false;
             }
@@ -133,22 +132,26 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
 
-    /** Método que faz login automaticamente após o registo seja um sucesso */
-    private void fazerLogin(String nm, String ps){
+    /**
+     * Método que faz login automaticamente após o registo seja um sucesso
+     */
+    private void fazerLogin(String nm, String ps) {
         firebaseAuth.signInWithEmailAndPassword(nm, ps).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()){
+                if (task.isSuccessful()) {
                     startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                     finish();
-                }else{
+                } else {
                     Toast.makeText(RegisterActivity.this, "Login unsuccessful", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
-    /** Método que volta para o login se for premido o botão Back no dispositivo */
+    /**
+     * Método que volta para o login se for premido o botão Back no dispositivo
+     */
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -165,10 +168,9 @@ public class RegisterActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
 
-            if(intent.getStringExtra("status").equalsIgnoreCase("internet connected")){
+            if (intent.getStringExtra("status").equalsIgnoreCase("internet connected")) {
                 tv_connected.setVisibility(View.GONE);
-            }
-            else{
+            } else {
                 tv_connected.setVisibility(View.VISIBLE);
             }
             //Toast.makeText(HomeActivity.this, intent.getStringExtra("status"), Toast.LENGTH_LONG).show();

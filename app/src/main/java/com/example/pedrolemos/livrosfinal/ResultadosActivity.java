@@ -78,7 +78,7 @@ public class ResultadosActivity extends AppCompatActivity {
 
         registerReceiver();
 
-        if (!isNetworkAvailable()){
+        if (!isNetworkAvailable()) {
             progressLayout.showEmpty(R.drawable.wifi_img, "You have no Internet Connection",
                     "To check this book's information, please connect to the internet and try again!");
         }
@@ -299,7 +299,6 @@ public class ResultadosActivity extends AppCompatActivity {
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting();
     }
-
 
 
 }

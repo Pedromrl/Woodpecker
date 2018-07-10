@@ -152,9 +152,9 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.Favo
 
         //TENTAR PÔR IMAGEM
         try {
-            if(favoritos.get(position).capa.equals("R.drawable.default_img")){
+            if (favoritos.get(position).capa.equals("R.drawable.default_img")) {
                 Picasso.with(context).load(R.drawable.default_img).fit().centerCrop().into(holder.capaFav);
-            }else{
+            } else {
                 Picasso.with(context).load(favoritos.get(position).capa).fit().centerCrop().into(holder.capaFav);
             }
 

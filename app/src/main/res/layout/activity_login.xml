@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity"
     android:background="@drawable/backgroundlogin"
     android:focusable="true"
-    android:focusableInTouchMode="true">
+    android:focusableInTouchMode="true"
+    tools:context=".LoginActivity">
 
     <ImageView
         android:id="@+id/logo"
@@ -16,27 +16,27 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="80dp"
         android:background="@drawable/applogo"
-        android:rotation="25"/>
+        android:rotation="25" />
 
     <TextView
         android:id="@+id/logotext"
-        android:layout_marginTop="220dp"
-        android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="60sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="220dp"
         android:fontFamily="cursive"
         android:text="Woodpecker"
-        android:textColor="@android:color/white"/>
+        android:textColor="@android:color/white"
+        android:textSize="60sp" />
 
 
     <RelativeLayout
         android:id="@+id/login"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
         android:layout_below="@+id/etPassword"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:layout_width="250dp"
-        android:layout_height="40dp"
         android:background="@drawable/transparent_layout"
         android:backgroundTint="@android:color/white"
 
@@ -45,9 +45,9 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:paddingVertical="7dp"
             android:text="LOGIN"
             android:textAlignment="center"
-            android:paddingVertical="7dp"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="18sp" />
 
@@ -56,19 +56,19 @@
 
     <LinearLayout
         android:id="@+id/signup"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
         android:layout_below="@+id/login"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:layout_width="250dp"
-        android:layout_height="40dp"
         android:background="@drawable/transparent_layout">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:paddingVertical="7dp"
             android:text="SIGN UP"
             android:textAlignment="center"
-            android:paddingVertical="7dp"
             android:textColor="#fff"
             android:textSize="18sp" />
 
@@ -81,13 +81,13 @@
         android:layout_below="@+id/logotext"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
+        android:backgroundTint="@android:color/white"
         android:drawableLeft="@drawable/email"
         android:hint="Email"
         android:inputType="textEmailAddress"
         android:textColor="@android:color/white"
         android:textColorHint="@android:color/white"
-        android:backgroundTint="@android:color/white"
-        android:textSize="14sp"/>
+        android:textSize="14sp" />
 
 
     <EditText
@@ -97,24 +97,24 @@
         android:layout_below="@+id/etEmail"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:textColor="@android:color/white"
-        android:textColorHint="@android:color/white"
+        android:backgroundTint="@android:color/white"
         android:drawableLeft="@drawable/password"
         android:hint="Password"
         android:inputType="textPassword"
-        android:backgroundTint="@android:color/white"
-        android:textSize="14sp"/>
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white"
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/forgotpassword"
         android:layout_width="250dp"
         android:layout_height="20dp"
-        android:textColor="@android:color/white"
-        android:layout_marginTop="10dp"
+        android:layout_below="@+id/signup"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
         android:text="Forgot your password?"
-        android:textSize="12sp"
-        android:layout_below="@+id/signup"/>
+        android:textColor="@android:color/white"
+        android:textSize="12sp" />
 
     <RelativeLayout
         android:id="@+id/aviView"
@@ -167,8 +167,6 @@
             android:visibility="gone" />
 
     </RelativeLayout>
-
-
 
 
 </RelativeLayout>

@@ -7,74 +7,71 @@
     tools:context=".fragments.CategoriesFragment">
 
 
-
     <LinearLayout
-        android:orientation="vertical"
-        android:background="@drawable/appbackground"
-        android:weightSum="10"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/appbackground"
+        android:orientation="vertical"
+        android:weightSum="10">
 
         <RelativeLayout
-            android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="12dp">
+            android:layout_height="12dp"
+            android:layout_weight="1">
 
 
         </RelativeLayout>
 
         <android.support.v7.widget.GridLayout
             android:id="@+id/mainGrid"
-            com.example.pedrolemos.livrosfinal:columnCount="2"
-            com.example.pedrolemos.livrosfinal:rowCount="3"
-            com.example.pedrolemos.livrosfinal:alignmentMode="alignMargins"
-            com.example.pedrolemos.livrosfinal:columnOrderPreserved="false"
-            android:layout_weight="8"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_weight="8"
             android:padding="4dp"
-            >
+            com.example.pedrolemos.livrosfinal:alignmentMode="alignMargins"
+            com.example.pedrolemos.livrosfinal:columnCount="2"
+            com.example.pedrolemos.livrosfinal:columnOrderPreserved="false"
+            com.example.pedrolemos.livrosfinal:rowCount="3">
 
             <!-- Row 1 -->
 
             <!-- Column 1 -->
             <android.support.v7.widget.CardView
+                android:id="@+id/horrorCard"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                com.example.pedrolemos.livrosfinal:layout_columnWeight="1"
-                com.example.pedrolemos.livrosfinal:layout_rowWeight="1"
                 android:layout_marginBottom="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                com.example.pedrolemos.livrosfinal:cardElevation="8dp"
-                com.example.pedrolemos.livrosfinal:cardCornerRadius="8dp"
                 android:backgroundTint="@color/colorHorror"
-                android:id="@+id/horrorCard"
-                >
+                com.example.pedrolemos.livrosfinal:cardCornerRadius="8dp"
+                com.example.pedrolemos.livrosfinal:cardElevation="8dp"
+                com.example.pedrolemos.livrosfinal:layout_columnWeight="1"
+                com.example.pedrolemos.livrosfinal:layout_rowWeight="1">
 
                 <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|center_vertical"
                     android:layout_margin="16dp"
-                    android:orientation="vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:orientation="vertical">
 
                     <ImageView
-                        android:src="@drawable/horror_category"
-                        android:layout_gravity="center_horizontal"
                         android:layout_width="60dp"
-                        android:layout_height="60dp" />
+                        android:layout_height="60dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/horror_category" />
 
                     <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:paddingTop="10dp"
                         android:text="Horror"
                         android:textAlignment="center"
                         android:textColor="@android:color/white"
                         android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
@@ -82,89 +79,86 @@
 
             <!-- Column 2 -->
             <android.support.v7.widget.CardView
+                android:id="@+id/actionCard"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                com.example.pedrolemos.livrosfinal:layout_columnWeight="1"
-                com.example.pedrolemos.livrosfinal:layout_rowWeight="1"
                 android:layout_marginBottom="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                com.example.pedrolemos.livrosfinal:cardElevation="8dp"
-                com.example.pedrolemos.livrosfinal:cardCornerRadius="8dp"
                 android:backgroundTint="@color/colorAction"
-                android:id="@+id/actionCard"
-                >
+                com.example.pedrolemos.livrosfinal:cardCornerRadius="8dp"
+                com.example.pedrolemos.livrosfinal:cardElevation="8dp"
+                com.example.pedrolemos.livrosfinal:layout_columnWeight="1"
+                com.example.pedrolemos.livrosfinal:layout_rowWeight="1">
 
                 <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|center_vertical"
                     android:layout_margin="16dp"
-                    android:orientation="vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:orientation="vertical">
 
                     <ImageView
-                        android:src="@drawable/action_category"
-                        android:layout_gravity="center_horizontal"
                         android:layout_width="60dp"
-                        android:layout_height="60dp" />
+                        android:layout_height="60dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/action_category" />
 
                     <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:paddingTop="10dp"
                         android:text="Action"
                         android:textAlignment="center"
                         android:textColor="@android:color/white"
                         android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
 
 
-
             <!-- Row 2 -->
 
             <!-- Column 1 -->
             <android.support.v7.widget.CardView
+                android:id="@+id/romanceCard"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                com.example.pedrolemos.livrosfinal:layout_columnWeight="1"
-                com.example.pedrolemos.livrosfinal:layout_rowWeight="1"
                 android:layout_marginBottom="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                com.example.pedrolemos.livrosfinal:cardElevation="8dp"
-                com.example.pedrolemos.livrosfinal:cardCornerRadius="8dp"
                 android:backgroundTint="@color/colorRomance"
-                android:id="@+id/romanceCard"
-                >
+                com.example.pedrolemos.livrosfinal:cardCornerRadius="8dp"
+                com.example.pedrolemos.livrosfinal:cardElevation="8dp"
+                com.example.pedrolemos.livrosfinal:layout_columnWeight="1"
+                com.example.pedrolemos.livrosfinal:layout_rowWeight="1">
 
                 <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|center_vertical"
                     android:layout_margin="16dp"
-                    android:orientation="vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:orientation="vertical">
 
                     <ImageView
-                        android:src="@drawable/romance_category"
-                        android:layout_gravity="center_horizontal"
                         android:layout_width="60dp"
-                        android:layout_height="60dp" />
+                        android:layout_height="60dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/romance_category" />
 
                     <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:paddingTop="10dp"
                         android:text="Romance"
                         android:textAlignment="center"
                         android:textColor="@android:color/white"
                         android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
@@ -172,42 +166,41 @@
 
             <!-- Column 2 -->
             <android.support.v7.widget.CardView
+                android:id="@+id/dramaCard"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                com.example.pedrolemos.livrosfinal:layout_columnWeight="1"
-                com.example.pedrolemos.livrosfinal:layout_rowWeight="1"
                 android:layout_marginBottom="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                com.example.pedrolemos.livrosfinal:cardElevation="8dp"
-                com.example.pedrolemos.livrosfinal:cardCornerRadius="8dp"
                 android:backgroundTint="@color/colorDrama"
-                android:id="@+id/dramaCard"
-                >
+                com.example.pedrolemos.livrosfinal:cardCornerRadius="8dp"
+                com.example.pedrolemos.livrosfinal:cardElevation="8dp"
+                com.example.pedrolemos.livrosfinal:layout_columnWeight="1"
+                com.example.pedrolemos.livrosfinal:layout_rowWeight="1">
 
                 <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|center_vertical"
                     android:layout_margin="16dp"
-                    android:orientation="vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:orientation="vertical">
 
                     <ImageView
-                        android:src="@drawable/drama_category"
-                        android:layout_gravity="center_horizontal"
                         android:layout_width="60dp"
-                        android:layout_height="60dp" />
+                        android:layout_height="60dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/drama_category" />
 
                     <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:paddingTop="10dp"
                         android:text="Drama"
                         android:textAlignment="center"
                         android:textColor="@android:color/white"
                         android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
@@ -218,42 +211,41 @@
 
             <!-- Column 1 -->
             <android.support.v7.widget.CardView
+                android:id="@+id/adventureCard"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                com.example.pedrolemos.livrosfinal:layout_columnWeight="1"
-                com.example.pedrolemos.livrosfinal:layout_rowWeight="1"
                 android:layout_marginBottom="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                com.example.pedrolemos.livrosfinal:cardElevation="8dp"
-                com.example.pedrolemos.livrosfinal:cardCornerRadius="8dp"
                 android:backgroundTint="@color/colorAdventure"
-                android:id="@+id/adventureCard"
-                >
+                com.example.pedrolemos.livrosfinal:cardCornerRadius="8dp"
+                com.example.pedrolemos.livrosfinal:cardElevation="8dp"
+                com.example.pedrolemos.livrosfinal:layout_columnWeight="1"
+                com.example.pedrolemos.livrosfinal:layout_rowWeight="1">
 
                 <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|center_vertical"
                     android:layout_margin="16dp"
-                    android:orientation="vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:orientation="vertical">
 
                     <ImageView
-                        android:src="@drawable/adventure_category"
-                        android:layout_gravity="center_horizontal"
                         android:layout_width="60dp"
-                        android:layout_height="60dp" />
+                        android:layout_height="60dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/adventure_category" />
 
                     <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:paddingTop="10dp"
                         android:text="Adventure"
                         android:textAlignment="center"
                         android:textColor="@android:color/white"
                         android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
@@ -262,294 +254,287 @@
 
             <!-- Column 2 -->
             <android.support.v7.widget.CardView
+                android:id="@+id/historyCard"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                com.example.pedrolemos.livrosfinal:layout_columnWeight="1"
-                com.example.pedrolemos.livrosfinal:layout_rowWeight="1"
                 android:layout_marginBottom="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                com.example.pedrolemos.livrosfinal:cardElevation="8dp"
-                com.example.pedrolemos.livrosfinal:cardCornerRadius="8dp"
                 android:backgroundTint="@color/colorHistory"
-                android:id="@+id/historyCard"
-                >
+                com.example.pedrolemos.livrosfinal:cardCornerRadius="8dp"
+                com.example.pedrolemos.livrosfinal:cardElevation="8dp"
+                com.example.pedrolemos.livrosfinal:layout_columnWeight="1"
+                com.example.pedrolemos.livrosfinal:layout_rowWeight="1">
 
                 <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|center_vertical"
                     android:layout_margin="16dp"
-                    android:orientation="vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:orientation="vertical">
 
                     <ImageView
-                        android:src="@drawable/history_category"
-                        android:layout_gravity="center_horizontal"
                         android:layout_width="60dp"
-                        android:layout_height="60dp" />
+                        android:layout_height="60dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/history_category" />
 
                     <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:paddingTop="10dp"
                         android:text="History"
                         android:textAlignment="center"
                         android:textColor="@android:color/white"
                         android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
+                android:id="@+id/artCard"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                com.example.pedrolemos.livrosfinal:layout_columnWeight="1"
-                com.example.pedrolemos.livrosfinal:layout_rowWeight="1"
                 android:layout_marginBottom="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                com.example.pedrolemos.livrosfinal:cardElevation="8dp"
-                com.example.pedrolemos.livrosfinal:cardCornerRadius="8dp"
                 android:backgroundTint="@color/colorArt"
-                android:id="@+id/artCard"
-                >
+                com.example.pedrolemos.livrosfinal:cardCornerRadius="8dp"
+                com.example.pedrolemos.livrosfinal:cardElevation="8dp"
+                com.example.pedrolemos.livrosfinal:layout_columnWeight="1"
+                com.example.pedrolemos.livrosfinal:layout_rowWeight="1">
 
                 <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|center_vertical"
                     android:layout_margin="16dp"
-                    android:orientation="vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:orientation="vertical">
 
                     <ImageView
-                        android:src="@drawable/art_category"
-                        android:layout_gravity="center_horizontal"
                         android:layout_width="60dp"
-                        android:layout_height="60dp" />
+                        android:layout_height="60dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/art_category" />
 
                     <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:paddingTop="10dp"
                         android:text="Art"
                         android:textAlignment="center"
                         android:textColor="@android:color/white"
                         android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
+                android:id="@+id/natureCard"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                com.example.pedrolemos.livrosfinal:layout_columnWeight="1"
-                com.example.pedrolemos.livrosfinal:layout_rowWeight="1"
                 android:layout_marginBottom="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                com.example.pedrolemos.livrosfinal:cardElevation="8dp"
-                com.example.pedrolemos.livrosfinal:cardCornerRadius="8dp"
                 android:backgroundTint="@color/colorNature"
-                android:id="@+id/natureCard"
-                >
+                com.example.pedrolemos.livrosfinal:cardCornerRadius="8dp"
+                com.example.pedrolemos.livrosfinal:cardElevation="8dp"
+                com.example.pedrolemos.livrosfinal:layout_columnWeight="1"
+                com.example.pedrolemos.livrosfinal:layout_rowWeight="1">
 
                 <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|center_vertical"
                     android:layout_margin="16dp"
-                    android:orientation="vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:orientation="vertical">
 
                     <ImageView
-                        android:src="@drawable/nature_category"
-                        android:layout_gravity="center_horizontal"
                         android:layout_width="60dp"
-                        android:layout_height="60dp" />
+                        android:layout_height="60dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/nature_category" />
 
                     <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:paddingTop="10dp"
                         android:text="Nature"
                         android:textAlignment="center"
                         android:textColor="@android:color/white"
                         android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
+                android:id="@+id/scienceCard"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                com.example.pedrolemos.livrosfinal:layout_columnWeight="1"
-                com.example.pedrolemos.livrosfinal:layout_rowWeight="1"
                 android:layout_marginBottom="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                com.example.pedrolemos.livrosfinal:cardElevation="8dp"
-                com.example.pedrolemos.livrosfinal:cardCornerRadius="8dp"
                 android:backgroundTint="@color/colorScience"
-                android:id="@+id/scienceCard"
-                >
+                com.example.pedrolemos.livrosfinal:cardCornerRadius="8dp"
+                com.example.pedrolemos.livrosfinal:cardElevation="8dp"
+                com.example.pedrolemos.livrosfinal:layout_columnWeight="1"
+                com.example.pedrolemos.livrosfinal:layout_rowWeight="1">
 
                 <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|center_vertical"
                     android:layout_margin="16dp"
-                    android:orientation="vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:orientation="vertical">
 
                     <ImageView
-                        android:src="@drawable/science_category"
-                        android:layout_gravity="center_horizontal"
                         android:layout_width="60dp"
-                        android:layout_height="60dp" />
+                        android:layout_height="60dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/science_category" />
 
                     <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:paddingTop="10dp"
                         android:text="Science"
                         android:textAlignment="center"
                         android:textColor="@android:color/white"
                         android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
+                android:id="@+id/businessCard"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                com.example.pedrolemos.livrosfinal:layout_columnWeight="1"
-                com.example.pedrolemos.livrosfinal:layout_rowWeight="1"
                 android:layout_marginBottom="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                com.example.pedrolemos.livrosfinal:cardElevation="8dp"
-                com.example.pedrolemos.livrosfinal:cardCornerRadius="8dp"
                 android:backgroundTint="@color/colorBusiness"
-                android:id="@+id/businessCard"
-                >
+                com.example.pedrolemos.livrosfinal:cardCornerRadius="8dp"
+                com.example.pedrolemos.livrosfinal:cardElevation="8dp"
+                com.example.pedrolemos.livrosfinal:layout_columnWeight="1"
+                com.example.pedrolemos.livrosfinal:layout_rowWeight="1">
 
                 <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|center_vertical"
                     android:layout_margin="16dp"
-                    android:orientation="vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:orientation="vertical">
 
                     <ImageView
-                        android:src="@drawable/business_category"
-                        android:layout_gravity="center_horizontal"
                         android:layout_width="60dp"
-                        android:layout_height="60dp" />
+                        android:layout_height="60dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/business_category" />
 
                     <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:paddingTop="10dp"
                         android:text="Business"
                         android:textAlignment="center"
                         android:textColor="@android:color/white"
                         android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
+                android:id="@+id/comedyCard"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                com.example.pedrolemos.livrosfinal:layout_columnWeight="1"
-                com.example.pedrolemos.livrosfinal:layout_rowWeight="1"
                 android:layout_marginBottom="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                com.example.pedrolemos.livrosfinal:cardElevation="8dp"
-                com.example.pedrolemos.livrosfinal:cardCornerRadius="8dp"
                 android:backgroundTint="@color/colorComedy"
-                android:id="@+id/comedyCard"
-                >
+                com.example.pedrolemos.livrosfinal:cardCornerRadius="8dp"
+                com.example.pedrolemos.livrosfinal:cardElevation="8dp"
+                com.example.pedrolemos.livrosfinal:layout_columnWeight="1"
+                com.example.pedrolemos.livrosfinal:layout_rowWeight="1">
 
                 <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|center_vertical"
                     android:layout_margin="16dp"
-                    android:orientation="vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:orientation="vertical">
 
                     <ImageView
-                        android:src="@drawable/comedy_category"
-                        android:layout_gravity="center_horizontal"
                         android:layout_width="60dp"
-                        android:layout_height="60dp" />
+                        android:layout_height="60dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/comedy_category" />
 
                     <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:paddingTop="10dp"
                         android:text="Humor"
                         android:textAlignment="center"
                         android:textColor="@android:color/white"
                         android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
+                android:id="@+id/sportsCard"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                com.example.pedrolemos.livrosfinal:layout_columnWeight="1"
-                com.example.pedrolemos.livrosfinal:layout_rowWeight="1"
                 android:layout_marginBottom="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                com.example.pedrolemos.livrosfinal:cardElevation="8dp"
-                com.example.pedrolemos.livrosfinal:cardCornerRadius="8dp"
                 android:backgroundTint="@color/colorSports"
-                android:id="@+id/sportsCard"
-                >
+                com.example.pedrolemos.livrosfinal:cardCornerRadius="8dp"
+                com.example.pedrolemos.livrosfinal:cardElevation="8dp"
+                com.example.pedrolemos.livrosfinal:layout_columnWeight="1"
+                com.example.pedrolemos.livrosfinal:layout_rowWeight="1">
 
                 <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|center_vertical"
                     android:layout_margin="16dp"
-                    android:orientation="vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:orientation="vertical">
 
                     <ImageView
-                        android:src="@drawable/sports_category"
-                        android:layout_gravity="center_horizontal"
                         android:layout_width="60dp"
-                        android:layout_height="60dp" />
+                        android:layout_height="60dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/sports_category" />
 
                     <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:paddingTop="10dp"
                         android:text="Sports"
                         android:textAlignment="center"
                         android:textColor="@android:color/white"
                         android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 

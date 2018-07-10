@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SplashScreenActivity"
-    android:background="@color/colorPrimary">
+    android:background="@color/colorPrimary"
+    tools:context=".SplashScreenActivity">
 
     <ImageView
         android:layout_width="170dp"
         android:layout_height="170dp"
-        android:src="@drawable/applogo"
         android:layout_centerInParent="true"
-        android:rotation="25"/>
+        android:rotation="25"
+        android:src="@drawable/applogo" />
 
 </RelativeLayout>

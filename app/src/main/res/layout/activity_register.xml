@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterActivity"
     android:background="@drawable/appbackground"
     android:focusable="true"
-    android:focusableInTouchMode="true">
+    android:focusableInTouchMode="true"
+    tools:context=".RegisterActivity">
 
     <ImageView
         android:id="@+id/logo"
@@ -16,7 +16,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="80dp"
         android:background="@drawable/applogobrown"
-        android:rotation="25"/>
+        android:rotation="25" />
 
     <EditText
         android:id="@+id/etUsernameR"
@@ -25,73 +25,73 @@
         android:layout_below="@+id/logo"
         android:layout_centerHorizontal="true"
         android:backgroundTint="@color/colorPrimaryDark"
+        android:drawableLeft="@drawable/user_r"
         android:hint="Username"
-        android:textColorHint="@color/colorPrimaryDark"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="14sp"
-        android:drawableLeft="@drawable/user_r"/>
+        android:textColorHint="@color/colorPrimaryDark"
+        android:textSize="14sp" />
 
     <EditText
         android:id="@+id/etEmailR"
         android:layout_width="250dp"
         android:layout_height="40dp"
         android:layout_below="@+id/etUsernameR"
-        android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
         android:backgroundTint="@color/colorPrimaryDark"
+        android:drawableLeft="@drawable/email_r"
         android:hint="Email"
         android:inputType="textEmailAddress"
-        android:textColorHint="@color/colorPrimaryDark"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="14sp"
-        android:drawableLeft="@drawable/email_r"/>
+        android:textColorHint="@color/colorPrimaryDark"
+        android:textSize="14sp" />
 
     <EditText
         android:id="@+id/etPasswordR"
         android:layout_width="250dp"
         android:layout_height="40dp"
         android:layout_below="@+id/etEmailR"
-        android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
         android:backgroundTint="@color/colorPrimaryDark"
+        android:drawableLeft="@drawable/password_r"
         android:hint="Password"
         android:inputType="textPassword"
-        android:textColorHint="@color/colorPrimaryDark"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="14sp"
-        android:drawableLeft="@drawable/password_r"/>
+        android:textColorHint="@color/colorPrimaryDark"
+        android:textSize="14sp" />
 
     <EditText
         android:id="@+id/etConfirmPasswordR"
         android:layout_width="250dp"
         android:layout_height="40dp"
         android:layout_below="@+id/etPasswordR"
-        android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
         android:backgroundTint="@color/colorPrimaryDark"
+        android:drawableLeft="@drawable/password_r"
         android:hint="Confirm Password"
         android:inputType="textPassword"
-        android:textColorHint="@color/colorPrimaryDark"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="14sp"
-        android:drawableLeft="@drawable/password_r"/>
+        android:textColorHint="@color/colorPrimaryDark"
+        android:textSize="14sp" />
 
     <LinearLayout
         android:id="@+id/signupR"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
         android:layout_below="@+id/etConfirmPasswordR"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:layout_width="250dp"
-        android:layout_height="40dp"
         android:background="@drawable/transparent_layout"
         android:backgroundTint="@color/colorPrimaryDark">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:paddingVertical="7dp"
             android:text="SIGN UP"
             android:textAlignment="center"
-            android:paddingVertical="7dp"
             android:textColor="#fff"
             android:textSize="18sp" />
 
@@ -103,10 +103,10 @@
         android:layout_height="20dp"
         android:layout_below="@id/signupR"
         android:layout_centerHorizontal="true"
-        android:textColor="@color/colorPrimaryDark"
-        android:text="Back to Login"
         android:layout_marginTop="5dp"
-        android:textSize="12sp"/>
+        android:text="Back to Login"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="12sp" />
 
     <RelativeLayout
         android:layout_width="wrap_content"

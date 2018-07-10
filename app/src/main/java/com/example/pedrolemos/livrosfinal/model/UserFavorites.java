@@ -1,6 +1,6 @@
 package com.example.pedrolemos.livrosfinal.model;
 
-public class UserFavorites{
+public class UserFavorites {
 
     public String nome, autor, descricao, categoria, capa;
 

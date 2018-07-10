@@ -67,17 +67,17 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String useremail = email.getText().toString().trim();
-                if (useremail.equals("")){
+                if (useremail.equals("")) {
                     Toast.makeText(ForgotPasswordActivity.this, "Please insert your email", Toast.LENGTH_LONG).show();
-                }else{
+                } else {
                     firebaseAuth.sendPasswordResetEmail(useremail).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()){
+                            if (task.isSuccessful()) {
                                 Toast.makeText(ForgotPasswordActivity.this, "The password reset has been sent to your email address", Toast.LENGTH_LONG).show();
                                 finish();
                                 startActivity(new Intent(ForgotPasswordActivity.this, LoginActivity.class));
-                            }else{
+                            } else {
                                 Toast.makeText(ForgotPasswordActivity.this, "There has been an error. Check if the email is correct or if your internet is connected", Toast.LENGTH_LONG).show();
                             }
                         }
@@ -103,10 +103,9 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
 
-            if(intent.getStringExtra("status").equalsIgnoreCase("internet connected")){
+            if (intent.getStringExtra("status").equalsIgnoreCase("internet connected")) {
                 tv_connected.setVisibility(View.GONE);
-            }
-            else{
+            } else {
                 tv_connected.setVisibility(View.VISIBLE);
             }
             //Toast.makeText(HomeActivity.this, intent.getStringExtra("status"), Toast.LENGTH_LONG).show();

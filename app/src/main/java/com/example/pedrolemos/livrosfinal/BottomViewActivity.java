@@ -62,8 +62,8 @@ public class BottomViewActivity extends AppCompatActivity {
    /* @BindView(R.id.toolbar)
     Toolbar mToolbar; */
 
-   @BindView(R.id.tv_connected)
-   TextView tv_connected;
+    @BindView(R.id.tv_connected)
+    TextView tv_connected;
 
     private String frag;
 
@@ -121,7 +121,6 @@ public class BottomViewActivity extends AppCompatActivity {
         txtv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
 
-
         toolbar = (JellyToolbar) findViewById(R.id.toolbar);
         // toolbar.getToolbar().setNavigationIcon(R.drawable.ic_menu);
 
@@ -155,7 +154,6 @@ public class BottomViewActivity extends AppCompatActivity {
         if (!isNetworkAvailable()) {
             mySnackbar.show();
         }
-
 
 
         mBottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -276,12 +274,11 @@ public class BottomViewActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
 
-            if(intent.getStringExtra("status").equalsIgnoreCase("internet connected")){
+            if (intent.getStringExtra("status").equalsIgnoreCase("internet connected")) {
 
-              //  tv_connected.setVisibility(View.GONE);
+                //  tv_connected.setVisibility(View.GONE);
                 mySnackbar.dismiss();
-            }
-            else{
+            } else {
                 //tv_connected.setVisibility(View.VISIBLE);
                 mySnackbar.show();
             }

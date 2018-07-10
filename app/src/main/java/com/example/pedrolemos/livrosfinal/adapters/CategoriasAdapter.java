@@ -61,7 +61,7 @@ public class CategoriasAdapter extends RecyclerView.Adapter<CategoriasAdapter.Ca
 
     @Override
     public CategoriasAdapter.CategoriaViewHolder onCreateViewHolder(ViewGroup parent,
-                                                            int viewType) {
+                                                                    int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(rowLayout, parent, false);
         return new CategoriaViewHolder(view);
     }
@@ -71,42 +71,41 @@ public class CategoriasAdapter extends RecyclerView.Adapter<CategoriasAdapter.Ca
 
         YoYo.with(Techniques.FadeIn).playOn(holder.card_view);
 
-        try{
+        try {
             holder.id.setText(items.get(position).getId());
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             holder.id.setText("NAOTEMID");
         }
 
 
         //TENTAR PÔR NOME
-        try{
+        try {
             int tamanho = livros.get(position).getTitle().length();
             String nomeLivro = livros.get(position).getTitle();
             String nomeLivroReduzido;
-            if (tamanho > 42){
+            if (tamanho > 42) {
                 nomeLivroReduzido = nomeLivro.substring(0, 30);
                 nomeLivroReduzido += "...";
                 holder.nome.setText(nomeLivroReduzido);
-            }else{
+            } else {
                 holder.nome.setText(nomeLivro);
             }
 
             //holder.nome.setText(livros.get(position).getTitle());
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             holder.nome.setText("Unrecognized Book name");
         }
 
 
         //TENTAR PÔR IMAGEM
-        try{
+        try {
             Picasso.with(context).load(livros.get(position).getImageLinks().getThumbnail()).fit().centerCrop().into(holder.capa);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             Picasso.with(context).load(R.drawable.default_img).fit().centerCrop().into(holder.capa);
         }
-
 
 
     }
@@ -115,7 +114,6 @@ public class CategoriasAdapter extends RecyclerView.Adapter<CategoriasAdapter.Ca
     public int getItemCount() {
         return livros.size();
     }
-
 
 
 }

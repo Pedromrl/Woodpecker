@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-public class NetworkChangeReceiver extends BroadcastReceiver{
+public class NetworkChangeReceiver extends BroadcastReceiver {
 
     public static final String NETWORK_CHANGE_ACTION = "com.example.pedrolemos.livrosfinal.receivers.NetworkChangeReceiver";
 

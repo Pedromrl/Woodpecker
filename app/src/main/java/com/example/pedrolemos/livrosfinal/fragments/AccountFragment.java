@@ -60,7 +60,6 @@ public class AccountFragment extends Fragment {
     FirebaseAuth firebaseAuth;
 
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -75,10 +74,10 @@ public class AccountFragment extends Fragment {
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try{
+                try {
                     startActivity(new Intent(getContext(), SettingsActivity.class));
-                   // getActivity().finish();
-                }catch (Exception e){
+                    // getActivity().finish();
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 
@@ -88,8 +87,8 @@ public class AccountFragment extends Fragment {
 
         avi.show();
 
-        final RecyclerView recyclerView =  view.findViewById(R.id.favoritos_recycler_view);
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(),1);
+        final RecyclerView recyclerView = view.findViewById(R.id.favoritos_recycler_view);
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(), 1);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setVisibility(View.INVISIBLE);
 
@@ -108,28 +107,26 @@ public class AccountFragment extends Fragment {
 
                 //Object data = dataSnapshot.getKey();
 
-                for (DataSnapshot individual: dataSnapshot.getChildren()) {
+                for (DataSnapshot individual : dataSnapshot.getChildren()) {
                     String key = individual.getKey();
                     //DatabaseReference bora = databaseReference.child(key);
 
                     UserFavorites userFavorites = dataSnapshot.child(key).getValue(UserFavorites.class);
                     favoritos.add(userFavorites);
                 }
-                if (favoritos.isEmpty()){
+                if (favoritos.isEmpty()) {
                     progressRelativeLayout.showEmpty(R.drawable.star_warning, "You have no favorites yet!",
                             "Add a book to your favorites so that you can see it here.");
                     favoritesString.setVisibility(View.INVISIBLE);
 
-                }else{
+                } else {
                     recyclerView.setAdapter(new FavoritosAdapter(favoritos, R.layout.list_item_favorito, getContext()));
                     recyclerView.setVisibility(View.VISIBLE);
                     favoritesString.setVisibility(View.VISIBLE);
                 }
 
 
-
                 avi.hide();
-
 
 
             }

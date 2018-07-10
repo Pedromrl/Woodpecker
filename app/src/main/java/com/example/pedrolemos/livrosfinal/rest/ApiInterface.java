@@ -16,5 +16,5 @@ public interface ApiInterface {
 
     @GET
     Call<BookResponse> getBooksByCategory(@Url String url);
-    
+
 }

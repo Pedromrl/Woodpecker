@@ -183,10 +183,9 @@ public class SettingsActivity extends AppCompatActivity implements ConfirmPasswo
         @Override
         public void onReceive(Context context, Intent intent) {
 
-            if(intent.getStringExtra("status").equalsIgnoreCase("internet connected")){
+            if (intent.getStringExtra("status").equalsIgnoreCase("internet connected")) {
                 tv_connected.setVisibility(View.GONE);
-            }
-            else{
+            } else {
                 tv_connected.setVisibility(View.VISIBLE);
             }
             //Toast.makeText(HomeActivity.this, intent.getStringExtra("status"), Toast.LENGTH_LONG).show();

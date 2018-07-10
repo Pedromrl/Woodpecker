@@ -36,7 +36,7 @@ public class LivrosAdapter extends RecyclerView.Adapter<LivrosAdapter.LivroViewH
         LinearLayout livrosLayout;
         TextView nome;
         TextView autor;
-       // TextView descricao;
+        // TextView descricao;
         ImageView capa;
         TextView id;
         CardView card_view;
@@ -47,7 +47,7 @@ public class LivrosAdapter extends RecyclerView.Adapter<LivrosAdapter.LivroViewH
             livrosLayout = (LinearLayout) v.findViewById(R.id.livros_layout);
             nome = (TextView) v.findViewById(R.id.nome);
             autor = (TextView) v.findViewById(R.id.autor);
-          //  descricao = (TextView) v.findViewById(R.id.descricao);
+            //  descricao = (TextView) v.findViewById(R.id.descricao);
             capa = (ImageView) v.findViewById(R.id.capa);
             id = (TextView) v.findViewById(R.id.id);
             card_view = (CardView) v.findViewById(R.id.card_view);
@@ -73,38 +73,38 @@ public class LivrosAdapter extends RecyclerView.Adapter<LivrosAdapter.LivroViewH
 
         YoYo.with(Techniques.SlideInUp).playOn(holder.card_view);
 
-        try{
+        try {
             holder.id.setText(items.get(position).getId());
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             holder.id.setText("NAOTEMID");
         }
 
 
         //TENTAR PÔR NOME
-        try{
+        try {
             int tamanho = livros.get(position).getTitle().length();
             String nomeLivro = livros.get(position).getTitle();
             String nomeLivroReduzido;
-            if (tamanho > 42){
+            if (tamanho > 42) {
                 nomeLivroReduzido = nomeLivro.substring(0, 30);
                 nomeLivroReduzido += "...";
                 holder.nome.setText(nomeLivroReduzido);
-            }else{
+            } else {
                 holder.nome.setText(nomeLivro);
             }
 
-          //holder.nome.setText(livros.get(position).getTitle());
-        }catch (Exception e){
+            //holder.nome.setText(livros.get(position).getTitle());
+        } catch (Exception e) {
             e.printStackTrace();
             holder.nome.setText("Unrecognized Book name");
         }
 
 
         //TENTAR PÔR AUTOR
-        try{
+        try {
             holder.autor.setText(livros.get(position).getAuthors().get(0));
-        }catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             holder.autor.setText("Unrecognized Author");
         }
@@ -123,13 +123,12 @@ public class LivrosAdapter extends RecyclerView.Adapter<LivrosAdapter.LivroViewH
 
 
         //TENTAR PÔR IMAGEM
-        try{
+        try {
             Picasso.with(context).load(livros.get(position).getImageLinks().getThumbnail()).fit().centerCrop().into(holder.capa);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             Picasso.with(context).load(R.drawable.default_img).fit().centerCrop().into(holder.capa);
         }
-
 
 
     }
@@ -138,7 +137,6 @@ public class LivrosAdapter extends RecyclerView.Adapter<LivrosAdapter.LivroViewH
     public int getItemCount() {
         return livros.size();
     }
-
 
 
 }

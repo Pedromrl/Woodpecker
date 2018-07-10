@@ -72,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
 
         //Verificar se algum utilizador já está logged in e se estiver mandá-lo automaticamente para a SecondActivity
         FirebaseUser user = firebaseAuth.getCurrentUser();
-        if(user != null){
+        if (user != null) {
             startActivity(new Intent(LoginActivity.this, BottomViewActivity.class));
             finish();
         }
@@ -88,12 +88,12 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (validar()){
+                if (validar()) {
                     aviView.setVisibility(View.VISIBLE);
                     firebaseAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()){
+                            if (task.isSuccessful()) {
                                 SharedPreferences sharedPref = LoginActivity.this.getPreferences(Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sharedPref.edit();
                                 editor.putString("email", email.getText().toString());
@@ -101,13 +101,13 @@ public class LoginActivity extends AppCompatActivity {
                                 editor.apply();
                                 startActivity(new Intent(LoginActivity.this, BottomViewActivity.class));
                                 finish();
-                            }else{
+                            } else {
                                 Toast.makeText(LoginActivity.this, "Login failed. Check your credentials and/or your internet connection", Toast.LENGTH_LONG).show();
                                 aviView.setVisibility(View.INVISIBLE);
                             }
                         }
                     });
-                }else{
+                } else {
 
                 }
             }
@@ -124,14 +124,14 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private Boolean validar(){
+    private Boolean validar() {
         Boolean result = false;
         String mail = email.getText().toString();
         String pass = password.getText().toString();
 
-        if (mail.isEmpty() || pass.isEmpty()){
+        if (mail.isEmpty() || pass.isEmpty()) {
             Toast.makeText(LoginActivity.this, "Please don't leave any field empty", Toast.LENGTH_LONG).show();
-        }else{
+        } else {
             result = true;
         }
         return result;
@@ -147,10 +147,9 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
 
-            if(intent.getStringExtra("status").equalsIgnoreCase("internet connected")){
+            if (intent.getStringExtra("status").equalsIgnoreCase("internet connected")) {
                 tv_connected.setVisibility(View.GONE);
-            }
-            else{
+            } else {
                 tv_connected.setVisibility(View.VISIBLE);
             }
             //Toast.makeText(HomeActivity.this, intent.getStringExtra("status"), Toast.LENGTH_LONG).show();

@@ -84,16 +84,15 @@ public class HomeFragment extends Fragment {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-        recyclerView =  view.findViewById(R.id.recomendar_recycler_view);
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(),1, GridLayoutManager.HORIZONTAL, false);
+        recyclerView = view.findViewById(R.id.recomendar_recycler_view);
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(), 1, GridLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setVisibility(View.VISIBLE);
 
-        recyclerView2 =  view.findViewById(R.id.recomendar_recycler_view2);
-        RecyclerView.LayoutManager mLayoutManager2 = new GridLayoutManager(getContext(),1, GridLayoutManager.HORIZONTAL, false);
+        recyclerView2 = view.findViewById(R.id.recomendar_recycler_view2);
+        RecyclerView.LayoutManager mLayoutManager2 = new GridLayoutManager(getContext(), 1, GridLayoutManager.HORIZONTAL, false);
         recyclerView2.setLayoutManager(mLayoutManager2);
         recyclerView2.setVisibility(View.VISIBLE);
-
 
 
         String utilizador = firebaseAuth.getCurrentUser().getUid();
@@ -110,47 +109,47 @@ public class HomeFragment extends Fragment {
 
                 //Object data = dataSnapshot.getKey();
 
-                for (DataSnapshot individual: dataSnapshot.getChildren()) {
+                for (DataSnapshot individual : dataSnapshot.getChildren()) {
                     String key = individual.getKey();
                     //DatabaseReference bora = databaseReference.child(key);
 
                     UserFavorites userFavorites = dataSnapshot.child(key).getValue(UserFavorites.class);
                     favoritos.add(userFavorites);
-                    try{
-                        if (userFavorites.categoria.equals("No Categories Listed")){
+                    try {
+                        if (userFavorites.categoria.equals("No Categories Listed")) {
 
-                        }else{
+                        } else {
                             categoriasCount.add(userFavorites.categoria);
                         }
 
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
 
                 }
-                if (favoritos.isEmpty()){
+                if (favoritos.isEmpty()) {
                     progressRelativeLayout.showEmpty(R.drawable.sad, "Not Enough Categories Found",
                             "Add at least 2 favorites with categories to your list so that we can recommend you new books!");
 
-                }else{
-                    if(categoriasCount.size() > 1){
+                } else {
+                    if (categoriasCount.size() > 1) {
                         String espaco = " ";
                         String tratar1 = categoriasCount.get(0);
                         String tratar2 = categoriasCount.get(1);
 
 
-                        if(tratar1.contains(espaco) || tratar2.contains(espaco)){
+                        if (tratar1.contains(espaco) || tratar2.contains(espaco)) {
                             enviarCategoria(tratar1);
                             enviarCategoria2(tratar2);
                             recyclerView.setVisibility(View.VISIBLE);
 
-                        }else{
+                        } else {
                             enviarCategoria(tratar1);
                             enviarCategoria2(tratar2);
                             recyclerView.setVisibility(View.VISIBLE);
                         }
 
-                    }else{
+                    } else {
                         progressRelativeLayout.showEmpty(R.drawable.sad, "Not Enough Categories Found",
                                 "Add at least 2 favorites with categories to your list so that we can recommend you new books!");
 
@@ -169,13 +168,10 @@ public class HomeFragment extends Fragment {
         });
 
 
-
-
-
         return view;
     }
 
-    private void enviarCategoria(String categoria){
+    private void enviarCategoria(String categoria) {
 
         String lol = "If you like " + categoria + ", you might like these:";
         categoriaString1.setText(lol);
@@ -198,7 +194,7 @@ public class HomeFragment extends Fragment {
             public void onResponse(Call<BookResponse> call, Response<BookResponse> response) {
                 int statusCode = response.code();
                 ArrayList<Items> api = new ArrayList<Items>();
-                try{
+                try {
                     Log.w("LINK", call.request().url().toString());
                     api = response.body().getItems();
 
@@ -213,8 +209,9 @@ public class HomeFragment extends Fragment {
 
 
                     recyclerView.addOnItemTouchListener(
-                            new RecyclerItemClickListener(getContext(), recyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
-                                @Override public void onItemClick(View view, int position) {
+                            new RecyclerItemClickListener(getContext(), recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(View view, int position) {
                                     Intent intent = new Intent(getContext(), LivroActivity.class);
                                     String nome = ((TextView) recyclerView.findViewHolderForAdapterPosition(position).itemView.findViewById(R.id.id_cat)).getText().toString();
                                     intent.putExtra("ISBN", nome);
@@ -222,12 +219,13 @@ public class HomeFragment extends Fragment {
 
                                 }
 
-                                @Override public void onLongItemClick(View view, int position) {
+                                @Override
+                                public void onLongItemClick(View view, int position) {
                                     // do whatever
                                 }
                             })
                     );
-                }catch(Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                     progressRelativeLayout.showEmpty(R.drawable.search, "No Search Results Found",
                             "Unfortunately I could not find any results matching your search");
@@ -248,7 +246,7 @@ public class HomeFragment extends Fragment {
         });
     }
 
-    private void enviarCategoria2(String categoria){
+    private void enviarCategoria2(String categoria) {
 
         String lol2 = "If you like " + categoria + ", you might like these:";
         categoriaString2.setText(lol2);
@@ -270,7 +268,7 @@ public class HomeFragment extends Fragment {
             public void onResponse(Call<BookResponse> call, Response<BookResponse> response) {
                 int statusCode = response.code();
                 ArrayList<Items> api = new ArrayList<Items>();
-                try{
+                try {
                     Log.w("LINK", call.request().url().toString());
                     api = response.body().getItems();
 
@@ -285,8 +283,9 @@ public class HomeFragment extends Fragment {
 
 
                     recyclerView2.addOnItemTouchListener(
-                            new RecyclerItemClickListener(getContext(), recyclerView2 ,new RecyclerItemClickListener.OnItemClickListener() {
-                                @Override public void onItemClick(View view, int position) {
+                            new RecyclerItemClickListener(getContext(), recyclerView2, new RecyclerItemClickListener.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(View view, int position) {
                                     Intent intent = new Intent(getContext(), LivroActivity.class);
                                     String nome = ((TextView) recyclerView2.findViewHolderForAdapterPosition(position).itemView.findViewById(R.id.id_cat)).getText().toString();
                                     intent.putExtra("ISBN", nome);
@@ -294,12 +293,13 @@ public class HomeFragment extends Fragment {
 
                                 }
 
-                                @Override public void onLongItemClick(View view, int position) {
+                                @Override
+                                public void onLongItemClick(View view, int position) {
                                     // do whatever
                                 }
                             })
                     );
-                }catch(Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                     progressRelativeLayout.showEmpty(R.drawable.search, "No Search Results Found",
                             "Unfortunately I could not find any results matching your search");
