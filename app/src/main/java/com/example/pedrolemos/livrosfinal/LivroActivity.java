@@ -118,7 +118,6 @@ public class LivroActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
 
 
-
         final CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
         AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.app_bar);
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
@@ -234,29 +233,34 @@ public class LivroActivity extends AppCompatActivity {
         });
 
 
-
-
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (flag == true) {
-                    Toast.makeText(LivroActivity.this, "This book is already in your favorites", Toast.LENGTH_SHORT).show();
+                if (!isNetworkAvailable()) {
+                    Toast.makeText(LivroActivity.this, "You need an internet connection!", Toast.LENGTH_LONG).show();
                 } else {
-                    fab.setImageResource(R.drawable.ic_favorito_checked);
-                    try {
-                        String utilizador = firebaseAuth.getCurrentUser().getUid();
-                        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-                        DatabaseReference mRef = firebaseDatabase.getReference(utilizador);
 
-                        UserFavorites user = new UserFavorites(nomeFire, autorFire, descricaoFire, categoriaFire, capaFire);
-                        mRef.child("Favoritos").child(idFire).setValue(user);
+                    if (flag == true) {
+                        Toast.makeText(LivroActivity.this, "This book is already in your favorites", Toast.LENGTH_SHORT).show();
+                    } else {
+                        fab.setImageResource(R.drawable.ic_favorito_checked);
+                        try {
+                            String utilizador = firebaseAuth.getCurrentUser().getUid();
+                            FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+                            DatabaseReference mRef = firebaseDatabase.getReference(utilizador);
 
-                        Toast.makeText(LivroActivity.this, nomeFire + " has been added to your favorites", Toast.LENGTH_SHORT).show();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        Toast.makeText(LivroActivity.this, "Couldn't add book to favorites", Toast.LENGTH_SHORT).show();
+                            UserFavorites user = new UserFavorites(nomeFire, autorFire, descricaoFire, categoriaFire, capaFire);
+                            mRef.child("Favoritos").child(idFire).setValue(user);
+
+                            Toast.makeText(LivroActivity.this, nomeFire + " has been added to your favorites", Toast.LENGTH_SHORT).show();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            Toast.makeText(LivroActivity.this, "Couldn't add book to favorites", Toast.LENGTH_SHORT).show();
+                        }
                     }
+
                 }
+
 
             }
         });

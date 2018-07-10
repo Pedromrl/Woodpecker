@@ -7,6 +7,7 @@
     <string name="str_news_feed">Woodpecker</string>
     <string name="backtologin">Back to Login</string>
     <string name="confirm_password_dialog">ConfirmPasswordDialog</string>
+    <string name="nointernet">No Internet Connection</string>
 
 
 </resources>

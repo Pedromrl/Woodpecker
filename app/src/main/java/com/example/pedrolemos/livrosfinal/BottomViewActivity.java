@@ -7,13 +7,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
@@ -22,6 +25,7 @@ import android.os.Bundle;
 import android.support.v7.widget.AppCompatEditText;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -44,6 +48,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.yalantis.jellytoolbar.listener.JellyListener;
 import com.yalantis.jellytoolbar.widget.JellyToolbar;
 
+import org.w3c.dom.Text;
+
 import java.lang.reflect.Field;
 
 import butterknife.BindView;
@@ -60,6 +66,8 @@ public class BottomViewActivity extends AppCompatActivity {
    TextView tv_connected;
 
     private String frag;
+
+    Snackbar mySnackbar;
 
     private static final String TEXT_KEY = "text";
 
@@ -103,6 +111,17 @@ public class BottomViewActivity extends AppCompatActivity {
 
         registerReceiver();
 
+        mySnackbar = Snackbar.make(findViewById(R.id.product_clMainView), R.string.nointernet, Snackbar.LENGTH_INDEFINITE);
+        mySnackbar.setActionTextColor(getColor(R.color.colorItem));
+        View sbView = mySnackbar.getView();
+        sbView.setBackgroundColor(Color.RED);
+        sbView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        TextView txtv = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+        txtv.setGravity(Gravity.CENTER_HORIZONTAL);
+        txtv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+
+
+
         toolbar = (JellyToolbar) findViewById(R.id.toolbar);
         // toolbar.getToolbar().setNavigationIcon(R.drawable.ic_menu);
 
@@ -131,6 +150,10 @@ public class BottomViewActivity extends AppCompatActivity {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             disableShiftMode(mBottomNavigationView);
+        }
+
+        if (!isNetworkAvailable()) {
+            mySnackbar.show();
         }
 
 
@@ -254,10 +277,13 @@ public class BottomViewActivity extends AppCompatActivity {
         public void onReceive(Context context, Intent intent) {
 
             if(intent.getStringExtra("status").equalsIgnoreCase("internet connected")){
-                tv_connected.setVisibility(View.GONE);
+
+              //  tv_connected.setVisibility(View.GONE);
+                mySnackbar.dismiss();
             }
             else{
-                tv_connected.setVisibility(View.VISIBLE);
+                //tv_connected.setVisibility(View.VISIBLE);
+                mySnackbar.show();
             }
             //Toast.makeText(HomeActivity.this, intent.getStringExtra("status"), Toast.LENGTH_LONG).show();
 
@@ -286,6 +312,13 @@ public class BottomViewActivity extends AppCompatActivity {
             ex.printStackTrace();
         }
         super.onDestroy();
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting();
     }
 
 
