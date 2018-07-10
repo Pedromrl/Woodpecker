@@ -130,6 +130,10 @@ public class ScanFragment extends Fragment implements ZXingScannerView.ResultHan
                 }
                 scannerView.setResultHandler(this);
                 scannerView.startCamera();
+
+                // Reload current fragment
+
+
             } else {
                 View.OnClickListener errorClickListener = new View.OnClickListener() {
                     @Override
@@ -188,6 +192,8 @@ public class ScanFragment extends Fragment implements ZXingScannerView.ResultHan
         Log.w(TAG, scanResult);
         startActivity(intent);
     }
+
+
 
 
 }
