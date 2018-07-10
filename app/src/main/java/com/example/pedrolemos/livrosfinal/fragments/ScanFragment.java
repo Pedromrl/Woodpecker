@@ -19,11 +19,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.pedrolemos.livrosfinal.BottomViewActivity;
@@ -56,7 +58,9 @@ public class ScanFragment extends Fragment implements ZXingScannerView.ResultHan
 
     private static final int REQUEST_CAMERA = 1;
     private ZXingScannerView scannerView;
-    private ProgressLinearLayout qrCameraLayout;
+    private RelativeLayout qrCameraLayout;
+    private RelativeLayout permissionDeniedLayout;
+    private CardView btnPermissions;
     private String TAG = "Scan Fragment";
     private int flag = 0;
 
@@ -70,7 +74,10 @@ public class ScanFragment extends Fragment implements ZXingScannerView.ResultHan
         View fragmentView = inflater.inflate(R.layout.fragment_scan, container, false);
 
 
+        permissionDeniedLayout = fragmentView.findViewById(R.id.layout_permission_denied);
         qrCameraLayout = fragmentView.findViewById(R.id.qrLayout);
+        btnPermissions = fragmentView.findViewById(R.id.btn_permissions);
+
         scannerView = new ZXingScannerView(getActivity());
         scannerView.setLayoutParams(new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
@@ -98,6 +105,8 @@ public class ScanFragment extends Fragment implements ZXingScannerView.ResultHan
         permissionManager.checkAndRequestPermissions(getActivity());
 
 
+
+
         return fragmentView;
 
     }
@@ -109,11 +118,15 @@ public class ScanFragment extends Fragment implements ZXingScannerView.ResultHan
         ArrayList<String> granted = permissionManager.getStatus().get(0).granted;
         ArrayList<String> denied = permissionManager.getStatus().get(0).denied;
 
-        for (String item : granted)
+        for (String item : granted){
             doMyAction();
+        }
+
 
         for (String item : denied)
             Toast.makeText(getContext(), "Permission Denied", Toast.LENGTH_SHORT).show();
+
+
 
     }
 
@@ -128,26 +141,30 @@ public class ScanFragment extends Fragment implements ZXingScannerView.ResultHan
                     scannerView = new ZXingScannerView(getContext());
                     //setContentView(scannerView);
                 }
+                permissionDeniedLayout.setVisibility(View.GONE);
                 scannerView.setResultHandler(this);
                 scannerView.startCamera();
 
-                // Reload current fragment
+
+
 
 
             } else {
-                View.OnClickListener errorClickListener = new View.OnClickListener() {
+                btnPermissions.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                       // startInstalledAppDetailsActivity(getActivity());
                         Intent intent = new Intent();
                         intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
                         Uri uri = Uri.fromParts("package", getContext().getPackageName(), null);
                         intent.setData(uri);
                         startActivity(intent);
                     }
-                };
-                qrCameraLayout.showError(R.drawable.sad, "Oh, no!",
-                        "You didn't accept the permission to use the Camera feature", "Try Again", errorClickListener);
+                });
+
+                permissionDeniedLayout.setVisibility(View.VISIBLE);
+
+                /*qrCameraLayout.showError(R.drawable.sad, "Oh, no!",
+                        "You didn't accept the permission to use the Camera feature", "Try Again", errorClickListener);*/
             }
         }
     }
@@ -181,6 +198,8 @@ public class ScanFragment extends Fragment implements ZXingScannerView.ResultHan
     private void doMyAction() {
         ZXingScannerView.ResultHandler a = this;
         scannerView.resumeCameraPreview(a);
+
+
     }
 
 
