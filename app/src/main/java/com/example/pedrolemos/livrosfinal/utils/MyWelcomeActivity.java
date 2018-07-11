@@ -17,6 +17,14 @@ public class MyWelcomeActivity extends WelcomeActivity {
                         "Welcome to Woodpecker!")
                 )
                 .page(new BasicPage(R.drawable.favorites_vector_welcome,
+                        "Browse freely",
+                        "Find books and check out their details individually!")
+                )
+                .page(new BasicPage(R.drawable.scan_vector_welcome,
+                        "Scan",
+                        "Use our scanning feature to find details about a book you currently possess")
+                )
+                .page(new BasicPage(R.drawable.favorites_vector_welcome,
                         "Add favorites!",
                         "Personalize your account by adding your favorite books")
                 )
