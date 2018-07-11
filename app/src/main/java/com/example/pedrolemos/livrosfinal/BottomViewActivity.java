@@ -44,7 +44,9 @@ import com.example.pedrolemos.livrosfinal.fragments.HomeFragment;
 import com.example.pedrolemos.livrosfinal.fragments.ScanFragment;
 import com.example.pedrolemos.livrosfinal.fragments.CategoriesFragment;
 import com.example.pedrolemos.livrosfinal.receivers.NetworkChangeReceiver;
+import com.example.pedrolemos.livrosfinal.utils.MyWelcomeActivity;
 import com.google.firebase.auth.FirebaseAuth;
+import com.stephentuso.welcome.WelcomeHelper;
 import com.yalantis.jellytoolbar.listener.JellyListener;
 import com.yalantis.jellytoolbar.widget.JellyToolbar;
 
@@ -71,6 +73,7 @@ public class BottomViewActivity extends AppCompatActivity {
 
     private static final String TEXT_KEY = "text";
 
+    WelcomeHelper welcomeScreen;
 
     private JellyToolbar toolbar;
     private AppCompatEditText editText;
@@ -103,6 +106,9 @@ public class BottomViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_bottom_view);
 
         ButterKnife.bind(this);
+
+        welcomeScreen = new WelcomeHelper(this, MyWelcomeActivity.class);
+        welcomeScreen.show(savedInstanceState);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             NetworkChangeReceiver mNetworkReceiver = new NetworkChangeReceiver();
@@ -201,6 +207,7 @@ public class BottomViewActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         outState.putString(TEXT_KEY, editText.getText().toString());
         super.onSaveInstanceState(outState);
+        welcomeScreen.onSaveInstanceState(outState);
     }
 
     @Override

@@ -75,6 +75,9 @@ dependencies {
     //Gerir permissões
     implementation 'com.github.karanchuri:PermissionManager:0.1.0'
 
+    //Welcome Screen
+    implementation 'com.stephentuso:welcome:1.4.1'
+
 
 }
 

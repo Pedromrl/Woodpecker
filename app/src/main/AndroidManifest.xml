@@ -31,6 +31,10 @@
             android:configChanges="orientation|keyboardHidden">
 
         </activity>
+
+        <activity android:name=".utils.MyWelcomeActivity"
+            android:theme="@style/WelcomeScreenTheme"/>
+
         <activity android:name=".RegisterActivity"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden"/>

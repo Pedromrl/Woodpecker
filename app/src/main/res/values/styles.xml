@@ -29,7 +29,7 @@
         <item name="android:windowTranslucentNavigation">true</item>
         <item name="android:fitsSystemWindows">true</item>
         <item name="android:windowBackground">@color/colorPrimaryDark</item>
-    </style>
+    </style>s
 
 
     <style name="AppTheme.NoActionBar">
