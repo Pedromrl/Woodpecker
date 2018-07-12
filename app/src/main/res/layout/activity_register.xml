@@ -29,7 +29,9 @@
         android:hint="Username"
         android:textColor="@color/colorPrimaryDark"
         android:textColorHint="@color/colorPrimaryDark"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        android:textCursorDrawable="@drawable/cursor"
+        />
 
     <EditText
         android:id="@+id/etEmailR"
@@ -44,7 +46,9 @@
         android:inputType="textEmailAddress"
         android:textColor="@color/colorPrimaryDark"
         android:textColorHint="@color/colorPrimaryDark"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        android:textCursorDrawable="@drawable/cursor"
+        />
 
     <EditText
         android:id="@+id/etPasswordR"
@@ -59,7 +63,8 @@
         android:inputType="textPassword"
         android:textColor="@color/colorPrimaryDark"
         android:textColorHint="@color/colorPrimaryDark"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        android:textCursorDrawable="@drawable/cursor"/>
 
     <EditText
         android:id="@+id/etConfirmPasswordR"
@@ -74,7 +79,8 @@
         android:inputType="textPassword"
         android:textColor="@color/colorPrimaryDark"
         android:textColorHint="@color/colorPrimaryDark"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        android:textCursorDrawable="@drawable/cursor"/>
 
     <LinearLayout
         android:id="@+id/signupR"
@@ -124,7 +130,7 @@
             android:gravity="center"
             android:text="No Internet Connection"
             android:textColor="@color/colorItem"
-            android:visibility="visible" />
+            android:visibility="gone" />
 
     </RelativeLayout>
 

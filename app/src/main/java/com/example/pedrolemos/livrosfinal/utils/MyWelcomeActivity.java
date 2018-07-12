@@ -13,10 +13,12 @@ public class MyWelcomeActivity extends WelcomeActivity {
         return new WelcomeConfiguration.Builder(this)
                 .defaultBackgroundColor(R.color.colorPrimaryDark)
 
-                .page(new TitlePage(R.drawable.logo_vector_welcome,
-                        "Welcome to Woodpecker!")
+                .page(new TitlePage(R.drawable.logo_vector_welcome_main,
+                        "Welcome to Woodpecker, Your new favorite book service application!")
+
+
                 )
-                .page(new BasicPage(R.drawable.favorites_vector_welcome,
+                .page(new BasicPage(R.drawable.search_vector_welcome,
                         "Browse freely",
                         "Find books and check out their details individually!")
                 )
@@ -38,8 +40,8 @@ public class MyWelcomeActivity extends WelcomeActivity {
                         "You can check all your favorites and access the settings menu.")
 
                 )
-                .page(new BasicPage(R.drawable.account_vector_welcome,
-                        "Now that you know...",
+                .page(new BasicPage(R.drawable.happy_vector_welcome,
+                        "Now that you already know...",
                         "Have fun using Woodpecker!")
                         .background(R.color.colorStart)
 
