@@ -166,9 +166,13 @@ public class SettingsActivity extends AppCompatActivity implements ConfirmPasswo
                                     Log.e("Null", e.toString());
                                 }
 
-                            }
+                            }else{
+                            Toast.makeText(SettingsActivity.this, task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                        }
                         }
                     });
+                }else{
+                    Toast.makeText(SettingsActivity.this, task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });

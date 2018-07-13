@@ -87,7 +87,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 fazerLogin(email.getText().toString(), password.getText().toString());
                             } else {
                                 aviView.setVisibility(View.INVISIBLE);
-                                Toast.makeText(RegisterActivity.this, "The registration failed", Toast.LENGTH_LONG).show();
+                                Toast.makeText(RegisterActivity.this, task.getException().getLocalizedMessage(), Toast.LENGTH_LONG).show();
 
                             }
                         }
@@ -134,7 +134,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                 if(pass.length() < 6){
                     aviView.setVisibility(View.INVISIBLE);
-                    Toast.makeText(RegisterActivity.this, "The password needs at least 6 characters", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegisterActivity.this, "The password needs to have at least 6 characters", Toast.LENGTH_LONG).show();
                     return false;
                 }else{
                     return true;
