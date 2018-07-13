@@ -29,7 +29,12 @@
         <item name="android:windowTranslucentNavigation">true</item>
         <item name="android:fitsSystemWindows">true</item>
         <item name="android:windowBackground">@color/colorPrimaryDark</item>
-    </style>s
+    </style>
+    s
+
+    <style name="WoodpeckerText" parent="AppTheme">
+        <item name="android:fontFamily">@font/dancing_script</item>
+    </style>
 
 
     <style name="AppTheme.NoActionBar">
