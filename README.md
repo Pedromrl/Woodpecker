@@ -1,21 +1,18 @@
 # Woodpecker
-Projeto final do CTeSP 
 
-O projeto permite ao utilizador registar-se e de seguida procurar qualquer livro que esteja presente na API Google Books,  disponibilizada pela Google.
+The project allows users to register and then search for any book available in the Google Books API, provided by Google.
 
-Lista completa de funcionalidades:
-- Registar
-- Recuperar password
+Complete list of features:
+
+- Registration
+- Password recovery
 - Login
-- Procurar livros por escrito (nome, id, ISBN)
-- Ver o resultados da pesquisa
-- Ver página individual de cada livro
-- Scan de livros pelo ISBN
-- Adicionar favoritos
-- Ver favoritos
-- Eliminar a lista favoritos
-- Alterar Email
-- Logout
+- Email change
+- Search for books (name, ID, ISBN)
+- View search results
+- View individual book details
+- Scan books by ISBN
+- Add to favorites
+- View favorites
 
-
-Todas as libraries utilizadas estão sob a licensa do MIT, pelo que nenhuma infringe as regras de Copyright.
+All libraries used are under the MIT license, therefore none infringe on copyright rules.
